@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-2.2.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
+[![Version](https://img.shields.io/badge/version-2.3.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?style=flat-square&logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-orange?style=flat-square)](https://claude.ai)
@@ -43,11 +43,13 @@ Plan ──► Execute ──► Verify ──► Cleanup
 
 ---
 
-## ✨ What's New in v2.2.0
+## ✨ What's New in v2.3.0
 
 | # | Change | Details |
 |---|--------|---------|
-| 🐛 | **unity-mcp config fix** | MCP config now uses `"url"` (HTTP) instead of `"command"` (subprocess) — fixes tools not appearing in `/mcp` |
+| 🆕 | **AI auto-configure MCP** | `unity-mcp` SKILL.md now instructs the AI agent to automatically write correct MCP config to `settings.json` when invoked |
+| 🔄 | **Step-by-step setup flow** | SKILL.md rewritten with explicit Step 1–4 guide (Package → Start → Config → Verify) |
+| 🐛 | **Compatibility note fix** | Removed incorrect Python 3.10+/uv requirement from skill metadata |
 
 <details>
 <summary>v2.1.0</summary>
@@ -306,6 +308,12 @@ oh-my-unity3d/
 ---
 
 ## 📋 Changelog
+
+### `v2.3.0` — AI Auto-Configure MCP
+
+- **Added** AI auto-configure flow in `unity-mcp` SKILL.md — when invoked, the agent automatically writes correct MCP config (`"url"`) to the platform settings file
+- **Changed** SKILL.md setup section rewritten as Step 1–4 (Package → Start → Config → Verify)
+- **Fixed** Skill metadata: removed incorrect Python 3.10+/uv dependency
 
 ### `v2.2.0` — MCP Config Hotfix
 

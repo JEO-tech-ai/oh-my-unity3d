@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-2.2.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
+[![Version](https://img.shields.io/badge/version-2.3.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?style=flat-square&logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-orange?style=flat-square)](https://claude.ai)
@@ -43,11 +43,13 @@ Plan ──► Execute ──► Verify ──► Cleanup
 
 ---
 
-## ✨ v2.2.0 새로운 기능
+## ✨ v2.3.0 새로운 기능
 
 | # | 변경 내용 | 상세 설명 |
 |---|-----------|-----------|
-| 🐛 | **unity-mcp 설정 수정** | MCP 설정을 `"command"` (subprocess) 방식에서 `"url"` (HTTP) 방식으로 변경 — 설치 후 `/mcp`에 도구가 노출되지 않던 문제 해결 |
+| 🆕 | **AI MCP 자동 설정** | `unity-mcp` SKILL.md 호출 시 AI 에이전트가 `settings.json`에 올바른 MCP 설정을 자동으로 작성 |
+| 🔄 | **단계별 설치 가이드** | SKILL.md를 Step 1–4(패키지 설치 → 서버 시작 → 설정 → 확인) 형식으로 재작성 |
+| 🐛 | **호환성 정보 수정** | 스킬 메타데이터에서 잘못된 Python 3.10+/uv 의존성 제거 |
 
 <details>
 <summary>v2.1.0</summary>
@@ -306,6 +308,12 @@ oh-my-unity3d/
 ---
 
 ## 📋 변경 이력
+
+### `v2.3.0` — AI MCP 자동 설정
+
+- **추가** `unity-mcp` SKILL.md에 AI 자동 설정 플로우 — 스킬 호출 시 에이전트가 플랫폼 설정 파일에 올바른 MCP 설정(`"url"`)을 자동으로 작성
+- **변경** SKILL.md 설치 섹션을 Step 1–4(패키지 → 시작 → 설정 → 확인) 형식으로 재작성
+- **수정** 스킬 메타데이터: 잘못된 Python 3.10+/uv 의존성 제거
 
 ### `v2.2.0` — MCP 설정 핫픽스
 

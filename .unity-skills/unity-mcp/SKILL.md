@@ -6,11 +6,12 @@ description: |
   PM·디자이너·게임개발자 역할별 최적 도구 매핑 제공.
 license: MIT
 compatibility: |
-  Unity 2021.3 LTS 이상 (2022+ 권장). Python 3.10+, uv 패키지 매니저 필요.
+  Unity 2021.3 LTS 이상 (2022+ 권장).
   Claude Code, Codex CLI, Gemini CLI, OpenCode에서 사용 가능.
+  mcp-for-unity는 Unity Package Manager로 설치 — 별도 Python/uv 불필요.
 allowed-tools: Read Write Bash Grep Glob Task WebFetch
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: supercent-io
   keyword: unity-mcp
   tags: unity, unity3d, mcp, game-development, editor-automation, ai-agent
@@ -31,24 +32,37 @@ metadata:
 
 ## 설치 및 초기 설정
 
-```bash
-# 스킬 설치
-npx skills add https://github.com/supercent-io/skills-template --skill unity-mcp
+### Step 1 — Unity Package 설치
 
-# unity-mcp 서버 설치 (Unity Package Manager 경유)
-# Unity Editor → Window → Package Manager → "+" → Add from git URL:
-# https://github.com/CoplayDev/unity-mcp.git
-
-# AI 클라이언트 자동 설정
-bash scripts/setup.sh
+Unity Editor → Window → Package Manager → "+" → **Add from git URL**:
+```
+https://github.com/CoplayDev/unity-mcp.git
 ```
 
-> **동작 원리**: `mcp-for-unity`는 Unity Editor가 직접 실행하는 HTTP 서버입니다.
-> AI 클라이언트는 새 프로세스를 띄우지 않고, Unity가 띄운 서버에 URL로 연결합니다.
+### Step 2 — Unity MCP 서버 시작
 
-### 플랫폼별 수동 설정
+Unity Editor → **Window → MCP → Start**
 
-**Claude Code** (`~/.claude/settings.json`):
+```bash
+# 서버 동작 확인
+curl http://localhost:8080/health
+# → {"status":"healthy","version":"..."}
+```
+
+### Step 3 — AI 클라이언트 MCP 자동 설정 (AI가 실행)
+
+> **AI 에이전트에게**: 사용자가 unity-mcp 설정을 요청하면 아래 절차를 **자동으로** 실행하세요.
+
+#### Claude Code (`~/.claude/settings.json`)
+
+```python
+# AI 실행 절차:
+# 1. ~/.claude/settings.json 읽기
+# 2. mcpServers.unity 항목을 URL 방식으로 추가/교체
+# 3. 파일 저장 후 사용자에게 Claude Code 재시작 안내
+```
+
+설정 값:
 ```json
 {
   "mcpServers": {
@@ -59,14 +73,16 @@ bash scripts/setup.sh
 }
 ```
 
-**Codex CLI** (`~/.codex/config.toml`):
+#### Codex CLI (`~/.codex/config.toml`)
+
 ```toml
 [[mcp_servers]]
 name = "unity"
 url = "http://localhost:8080/mcp"
 ```
 
-**Gemini CLI** (`~/.gemini/settings.json`):
+#### Gemini CLI (`~/.gemini/settings.json`)
+
 ```json
 {
   "mcpServers": {
@@ -77,8 +93,17 @@ url = "http://localhost:8080/mcp"
 }
 ```
 
-> **주의**: `"command": "python"` 방식(subprocess)은 동작하지 않습니다.
-> Unity가 이미 HTTP 서버를 실행 중이므로 반드시 `"url"` 방식을 사용하세요.
+> **동작 원리**: `mcp-for-unity`는 Unity Editor가 직접 실행하는 HTTP 서버입니다.
+> AI 클라이언트는 새 프로세스를 띄우지 않고, URL로 이미 실행 중인 서버에 연결합니다.
+>
+> ⚠️ `"command": "python"` 방식(subprocess)은 포트 충돌로 동작하지 않습니다.
+
+### Step 4 — 도구 확인
+
+Claude Code 재시작 후:
+```bash
+/mcp   # unity 항목과 도구 목록 확인
+```
 
 ---
 
