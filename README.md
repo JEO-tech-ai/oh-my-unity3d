@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
+[![Version](https://img.shields.io/badge/version-2.2.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?style=flat-square&logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-orange?style=flat-square)](https://claude.ai)
@@ -43,7 +43,14 @@ Plan ──► Execute ──► Verify ──► Cleanup
 
 ---
 
-## ✨ What's New in v2.1.0
+## ✨ What's New in v2.2.0
+
+| # | Change | Details |
+|---|--------|---------|
+| 🐛 | **unity-mcp config fix** | MCP config now uses `"url"` (HTTP) instead of `"command"` (subprocess) — fixes tools not appearing in `/mcp` |
+
+<details>
+<summary>v2.1.0</summary>
 
 | # | Change | Details |
 |---|--------|---------|
@@ -55,6 +62,8 @@ Plan ──► Execute ──► Verify ──► Cleanup
 | 🔄 | **oh-my-codex → omx** | Codex CLI setup skill renamed to `omx` |
 | 🔄 | **OpenCode support** | All platform tables updated with 4th platform |
 | 🔄 | **design-system** | Unity3D Design Guide section added (color palette, typography, sprite naming) |
+
+</details>
 
 ---
 
@@ -108,6 +117,9 @@ bash .unity-skills/unity-mcp/scripts/setup.sh
 # In Unity Editor: Window → MCP → Start
 curl http://localhost:8080/health  # Verify connection
 ```
+
+> **How it works**: Unity Editor manages the `mcp-for-unity` HTTP server automatically.
+> AI clients connect via `"url": "http://localhost:8080/mcp"` — no Python subprocess needed.
 
 ### 4. Run Your First Workflow
 
@@ -294,6 +306,12 @@ oh-my-unity3d/
 ---
 
 ## 📋 Changelog
+
+### `v2.2.0` — MCP Config Hotfix
+
+- **Fixed** unity-mcp MCP config: changed from `"command": "python"` (subprocess) to `"url": "http://localhost:8080/mcp"` (HTTP) — resolves tools not appearing in `/mcp` after installation
+- **Updated** `setup.sh` to write correct URL-based config for all platforms
+- **Updated** `SKILL.md` with correct platform configs and troubleshooting note
 
 ### `v2.1.0` — Unity3D Integration Release
 

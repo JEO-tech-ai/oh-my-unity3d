@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
+[![Version](https://img.shields.io/badge/version-2.2.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?style=flat-square&logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-orange?style=flat-square)](https://claude.ai)
@@ -43,7 +43,14 @@ Plan ──► Execute ──► Verify ──► Cleanup
 
 ---
 
-## ✨ v2.1.0 새로운 기능
+## ✨ v2.2.0 새로운 기능
+
+| # | 변경 내용 | 상세 설명 |
+|---|-----------|-----------|
+| 🐛 | **unity-mcp 설정 수정** | MCP 설정을 `"command"` (subprocess) 방식에서 `"url"` (HTTP) 방식으로 변경 — 설치 후 `/mcp`에 도구가 노출되지 않던 문제 해결 |
+
+<details>
+<summary>v2.1.0</summary>
 
 | # | 변경 내용 | 상세 설명 |
 |---|-----------|-----------|
@@ -55,6 +62,8 @@ Plan ──► Execute ──► Verify ──► Cleanup
 | 🔄 | **oh-my-codex → omx** | Codex CLI 설정 스킬 이름 변경 |
 | 🔄 | **OpenCode 지원** | 모든 플랫폼 테이블에 4번째 플랫폼 추가 |
 | 🔄 | **design-system** | Unity3D 디자인 가이드 섹션 추가 (색상 팔레트, 타이포그래피, 스프라이트 명명 규칙) |
+
+</details>
 
 ---
 
@@ -108,6 +117,9 @@ bash .unity-skills/unity-mcp/scripts/setup.sh
 # Unity 에디터에서: Window → MCP → Start
 curl http://localhost:8080/health  # 연결 확인
 ```
+
+> **동작 원리**: Unity Editor가 `mcp-for-unity` HTTP 서버를 자동으로 실행합니다.
+> AI 클라이언트는 `"url": "http://localhost:8080/mcp"` 로 연결합니다 — Python subprocess 불필요.
 
 ### 4. 첫 번째 워크플로우 실행
 
@@ -294,6 +306,12 @@ oh-my-unity3d/
 ---
 
 ## 📋 변경 이력
+
+### `v2.2.0` — MCP 설정 핫픽스
+
+- **수정** unity-mcp MCP 설정: `"command": "python"` (subprocess) → `"url": "http://localhost:8080/mcp"` (HTTP) 변경 — 설치 후 `/mcp`에 도구가 노출되지 않던 문제 해결
+- **수정** `setup.sh`: 모든 플랫폼에서 올바른 URL 방식 설정 적용
+- **수정** `SKILL.md`: 올바른 플랫폼별 설정 코드 및 트러블슈팅 노트 업데이트
 
 ### `v2.1.0` — Unity3D 통합 릴리즈
 

@@ -43,6 +43,9 @@ npx skills add https://github.com/supercent-io/skills-template --skill unity-mcp
 bash scripts/setup.sh
 ```
 
+> **동작 원리**: `mcp-for-unity`는 Unity Editor가 직접 실행하는 HTTP 서버입니다.
+> AI 클라이언트는 새 프로세스를 띄우지 않고, Unity가 띄운 서버에 URL로 연결합니다.
+
 ### 플랫폼별 수동 설정
 
 **Claude Code** (`~/.claude/settings.json`):
@@ -50,9 +53,7 @@ bash scripts/setup.sh
 {
   "mcpServers": {
     "unity": {
-      "command": "python",
-      "args": ["-m", "mcp_unity"],
-      "env": { "UNITY_PORT": "8080" }
+      "url": "http://localhost:8080/mcp"
     }
   }
 }
@@ -62,9 +63,7 @@ bash scripts/setup.sh
 ```toml
 [[mcp_servers]]
 name = "unity"
-command = "python"
-args = ["-m", "mcp_unity"]
-env = { UNITY_PORT = "8080" }
+url = "http://localhost:8080/mcp"
 ```
 
 **Gemini CLI** (`~/.gemini/settings.json`):
@@ -72,12 +71,14 @@ env = { UNITY_PORT = "8080" }
 {
   "mcpServers": {
     "unity": {
-      "command": "python",
-      "args": ["-m", "mcp_unity"]
+      "url": "http://localhost:8080/mcp"
     }
   }
 }
 ```
+
+> **주의**: `"command": "python"` 방식(subprocess)은 동작하지 않습니다.
+> Unity가 이미 HTTP 서버를 실행 중이므로 반드시 `"url"` 방식을 사용하세요.
 
 ---
 
@@ -166,6 +167,7 @@ jeo "씬 프로토타이핑: 플랫포머 게임"
 
 | 문제 | 해결 방법 |
 |------|---------|
+| `/mcp`에 unity 도구가 안 보임 | `"command"` 대신 `"url": "http://localhost:8080/mcp"` 사용 확인 |
 | localhost:8080 연결 안 됨 | Unity Editor → MCP 창 → Start 버튼 클릭 |
 | 스크립트 검증 실패 | `validate_script` 에러 메시지 확인 후 `manage_script`로 수정 |
 | batch_execute 타임아웃 | 작업을 소규모 배치로 분할 |
