@@ -19,8 +19,8 @@
 Check which AI platforms are installed and set the installation root:
 
 ```bash
-SKILLS_ROOT="$HOME/.agent-skills"
-mkdir -p "$SKILLS_ROOT"
+# skills CLI v1.x installs to ~/.agents/skills/ and symlinks to all platform paths
+SKILLS_ROOT="$HOME/.agents/skills"
 
 # Detect available platforms
 echo "=== Platform Detection ==="
@@ -41,17 +41,20 @@ Install the orchestration core that all platforms share:
 # Prerequisite: skills CLI
 npm install -g skills
 
+# --yes   : skip all interactive prompts
+# --global: install to all detected platforms, overwrite existing versions
+
 # Core orchestration
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill jeo
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ralph
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill plannotator
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill jeo --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ralph --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill plannotator --yes --global
 
 # Unity3D integration (required for Unity projects)
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill unity-mcp
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill unity-mcp --yes --global
 
 # Game development workflow
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill bmad-gds
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill bmad-idea
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill bmad-gds --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill bmad-idea --yes --global
 ```
 
 ---
@@ -64,53 +67,53 @@ Install all 44 available skills:
 
 ```bash
 # Platform setup skills
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill omc       # Claude Code
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ohmg      # Gemini CLI
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill oh-my-codex  # Codex CLI (keyword: omx)
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ralphmode
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill omc          --yes --global  # Claude Code
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ohmg         --yes --global  # Gemini CLI
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill oh-my-codex  --yes --global  # Codex CLI (keyword: omx)
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ralphmode     --yes --global
 
 # Development
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill code-review
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill code-refactoring
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill backend-testing
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill testing-strategies
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill codebase-search
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill git-workflow
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill git-submodule
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill changelog-maintenance
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill api-design
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill api-documentation
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill security-best-practices
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill performance-optimization
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill pattern-detection
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill environment-setup
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill workflow-automation
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill file-organization
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill code-review           --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill code-refactoring      --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill backend-testing       --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill testing-strategies    --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill codebase-search       --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill git-workflow          --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill git-submodule         --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill changelog-maintenance --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill api-design            --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill api-documentation     --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill security-best-practices  --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill performance-optimization --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill pattern-detection     --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill environment-setup     --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill workflow-automation   --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill file-organization     --yes --global
 
 # Design & UI
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill design-system
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ui-component-patterns
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill web-accessibility
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill web-design-guidelines
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill responsive-design
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill design-system         --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ui-component-patterns --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill web-accessibility     --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill web-design-guidelines --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill responsive-design     --yes --global
 
 # Infrastructure & Data
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill database-schema-design
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill log-analysis
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill data-analysis
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill llm-monitoring-dashboard
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill task-planning
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill task-estimation
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill database-schema-design --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill log-analysis           --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill data-analysis          --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill llm-monitoring-dashboard --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill task-planning          --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill task-estimation        --yes --global
 
 # Creative & Content
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill image-generation
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill video-production
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill marketing-skills-collection
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill pptx-presentation-builder
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill remotion-video-production
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill opencontext
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill prompt-repetition
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill vibe-kanban
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill image-generation           --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill video-production           --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill marketing-skills-collection --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill pptx-presentation-builder  --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill remotion-video-production  --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill opencontext               --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill prompt-repetition         --yes --global
+npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill vibe-kanban               --yes --global
 ```
 
 ---
