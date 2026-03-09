@@ -27,6 +27,10 @@ JEO is the release-oriented orchestration skill package shipped in this reposito
 
 Run the phases in order. Do not skip PLAN. Do not enter EXECUTE without an approved plan.
 
+### Unity3D 모드 (unity-mcp 감지)
+
+unity-mcp 서버가 실행 중인 경우 (`localhost:8080` 연결 확인 시) Unity3D 검증 루프가 활성화됩니다.
+
 ### STEP 0: Bootstrap
 
 Create the working state directories:
@@ -161,6 +165,27 @@ Verification rule:
 - capture evidence before cleanup when the task is browser-facing
 - keep the state file in `phase = "verify"` until verification is complete
 
+### STEP 3: VERIFY — Unity3D 검증 루프
+
+Unity3D 모드가 활성화된 경우 브라우저 검증 대신 아래 루프를 실행합니다.
+
+① `unity-mcp: run_tests`     → pass/fail 집계
+② `unity-mcp: read_console`  → Error/Exception 패턴 탐지
+③ `unity-mcp: editor_state`  → 씬 로드 상태 확인
+④ `unity-mcp: find_gameobjects` → 필수 오브젝트 확인
+
+검증 결과:
+
+- 모두 통과 → CLEANUP
+- 실패 → Fix 루프 (code-refactoring 또는 `unity-mcp: validate_script` → 재검증, 최대 3회)
+- 3회 초과 → 사용자 확인 요청
+
+`jeo-state.json` 업데이트:
+
+```json
+{ "unity_verify": { "tests_passed": true, "console_errors": 0, "retry_count": 0 } }
+```
+
 ---
 
 ## 4. CLEANUP
@@ -188,7 +213,59 @@ Cleanup rule:
 
 ---
 
-## 5. Quick Start
+## 5. Unity3D 워크플로우 예제
+
+### Workflow 1: 게임 기획 → 씬 프로토타이핑
+
+```
+jeo "씬 프로토타이핑: <게임명>"
+  [PLAN]     bmad-gds-brainstorm-game → bmad-gds-gdd
+  [EXECUTE]  unity-mcp: manage_scene → manage_gameobject → manage_probuilder
+  [VERIFY]   unity-mcp: run_tests → read_console → editor_state → Fix 루프 (max 3)
+  [CLEANUP]
+```
+
+### Workflow 2: 스프린트 스토리 → C# 구현
+
+```
+jeo "스토리 구현: <스토리명>"
+  [PLAN]     bmad-gds-sprint-planning → bmad-gds-create-story
+  [EXECUTE]  bmad-gds-dev-story → unity-mcp: create_script → validate_script → script_apply_edits
+  [VERIFY]   unity-mcp: run_tests → read_console → Fix 루프 → bmad-gds-code-review
+  [CLEANUP]
+```
+
+### Workflow 3: 에셋 파이프라인 자동화
+
+```
+jeo "에셋 파이프라인: <에셋 종류>"
+  [PLAN]     file-organization
+  [EXECUTE]  unity-mcp: manage_asset → manage_texture → manage_material → manage_prefabs → batch_execute
+  [VERIFY]   unity-mcp: read_console → run_tests → performance-optimization → Fix 루프
+  [CLEANUP]
+```
+
+### Workflow 4: Unity UI/비주얼 개발
+
+```
+design-system (Unity3D Design Guide 탐색)
+  → ui-component-patterns → unity-mcp: manage_ui → manage_animation → manage_vfx
+  → [VERIFY] unity-mcp: run_tests → read_console
+```
+
+### Workflow 5: 성능 최적화 & 디버깅
+
+```
+jeo "성능 최적화: <증상>"
+  [PLAN]     log-analysis (unity-mcp: read_console) → find_gameobjects → codebase-search
+  [EXECUTE]  performance-optimization → unity-mcp: manage_components → batch_execute
+  [VERIFY]   unity-mcp: run_tests → read_console → bmad-gds-performance-test → Fix 루프
+  [CLEANUP]
+```
+
+---
+
+## 6. Quick Start
 
 ### Install dependencies and helpers
 
@@ -213,7 +290,7 @@ bash scripts/setup-opencode.sh
 
 ---
 
-## 6. Installed Components
+## 7. Installed Components
 
 | Tool | Purpose |
 |------|---------|
@@ -228,7 +305,7 @@ bash scripts/setup-opencode.sh
 
 ---
 
-## 7. Platform Notes
+## 8. Platform Notes
 
 ### Claude Code
 
@@ -249,7 +326,7 @@ bash scripts/setup-opencode.sh
 
 ---
 
-## 8. State File
+## 9. State File
 
 Path:
 
@@ -277,7 +354,7 @@ Example:
 
 ---
 
-## 9. Troubleshooting
+## 10. Troubleshooting
 
 | Problem | Action |
 |---------|--------|
@@ -290,7 +367,7 @@ Example:
 
 ---
 
-## 10. Release Notes
+## 11. Release Notes
 
 ### `v2.0.0`
 

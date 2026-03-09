@@ -1,121 +1,326 @@
-# JEO for Unity3D
+<![CDATA[# 🎮 oh-my-unity3d
 
-Release-ready distribution for the `JEO` orchestration skill package shipped in `.unity-skills/jeo`.
+<div align="center">
 
-`JEO` standardizes a single workflow across Claude Code, Codex CLI, Gemini CLI, and OpenCode:
+[![Version](https://img.shields.io/badge/version-2.1.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+[![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?style=flat-square&logo=unity)](https://unity.com)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-orange?style=flat-square)](https://claude.ai)
+[![Codex CLI](https://img.shields.io/badge/Codex%20CLI-supported-green?style=flat-square)](https://openai.com)
+[![Gemini CLI](https://img.shields.io/badge/Gemini%20CLI-supported-blue?style=flat-square)](https://gemini.google.com)
+[![OpenCode](https://img.shields.io/badge/OpenCode-supported-purple?style=flat-square)](https://opencode.ai)
+[![Skills](https://img.shields.io/badge/skills-44-yellow?style=flat-square)](#-skills-index)
 
-`Plan -> Execute -> Verify -> Cleanup`
+**AI-driven Unity3D game development orchestration — Plan → Execute → Verify → Cleanup**
 
-This release is built around:
+[Quick Start](#-quick-start) · [Workflows](#-unity3d-workflows) · [Skills](#-skills-index) · [Docs](#-documentation)
 
-- `ralph` + `plannotator` for mandatory plan review
-- `omc` team mode or `bmad` fallback for execution
-- `agent-browser` for browser verification
-- `worktree-cleanup.sh` for post-task cleanup
+</div>
 
-`v2.0.0` removes `agentation` support entirely. There is no `annotate` or `agentui` path in this package.
+---
 
-## What Ships
+## 📦 Overview
 
-Repository layout:
+`oh-my-unity3d` is a release-ready distribution for the **JEO** orchestration skill package, extended for Unity3D game development with **unity-mcp** integration.
 
-```text
-.unity-skills/jeo/
-  SKILL.md
-  SKILL.toon
-  references/FLOW.md
-  scripts/
-    install.sh
-    check-status.sh
-    ensure-plannotator.sh
-    plannotator-plan-loop.sh
-    setup-claude.sh
-    setup-codex.sh
-    setup-gemini.sh
-    setup-opencode.sh
-    worktree-cleanup.sh
+```
+Plan ──► Execute ──► Verify ──► Cleanup
+ │          │           │
+ │      unity-mcp    run_tests
+ │      bmad-gds     read_console
+ └──   omc / bmad    editor_state
 ```
 
-## Supported Platforms
+| Layer | Component | Role |
+|-------|-----------|------|
+| **Orchestration** | `jeo` | Plan → Execute → Verify → Cleanup pipeline |
+| **Game Dev** | `bmad-gds` | Brainstorm → GDD → Architecture → Sprint → Dev → Review |
+| **Unity Editor** | `unity-mcp` | 37 MCP tools for direct Unity Editor control |
+| **Planning Gate** | `ralph` + `plannotator` | Mandatory plan review before execution |
+| **Verification** | `agent-browser` + unity-mcp | Browser + Unity runtime verification loop |
 
-| Platform | Planning | Execution | Verification |
-|----------|----------|-----------|--------------|
-| Claude Code | `ralph` + `plannotator` hook | `omc` team mode | `agent-browser` |
-| Codex CLI | `plan.md` + `plannotator` loop | `bmad` fallback | `agent-browser` |
-| Gemini CLI | `plan.md` + AfterAgent helper | `bmad` or `ohmg` | `agent-browser` |
-| OpenCode | slash-command workflow | `omx` or `bmad` | `agent-browser` |
+---
 
-## Quick Start
+## ✨ What's New in v2.1.0
 
-Clone the repository and enter the skill directory:
+| # | Change | Details |
+|---|--------|---------|
+| 🆕 | **unity-mcp skill** | New skill — configures and calls all 37 Unity Editor MCP tools |
+| 🆕 | **Unity3D verify loop** | JEO VERIFY now runs `run_tests → read_console → editor_state` auto-fix loop |
+| 🆕 | **5 Unity3D workflows** | Scene prototyping, C# dev, asset pipeline, UI/visual, perf optimization |
+| 🆕 | **SKILLS-INDEX.md** | Full 44-skill directory with categories and quick-select guide |
+| 🆕 | **WORKFLOWS.md** | End-to-end Unity3D workflow documentation |
+| 🔄 | **oh-my-codex → omx** | Codex CLI setup skill renamed to `omx` |
+| 🔄 | **OpenCode support** | All platform tables updated with 4th platform |
+| 🔄 | **design-system** | Unity3D Design Guide section added (color palette, typography, sprite naming) |
+
+---
+
+## 🚀 Quick Start (For LLM Agents)
+
+> Prerequisite: Install the `skills` CLI before running any `npx skills add` commands.
 
 ```bash
+npm install -g skills
+```
+
+Send this to your LLM agent to begin the full installation:
+
+```bash
+# Read the full installation guide and proceed automatically
+curl -s https://raw.githubusercontent.com/JEO-tech-ai/oh-my-unity3d/main/setup-all-skills-prompt.md
+```
+
+More skill installs → [GETTING-STARTED.md](GETTING-STARTED.md) · Platform-specific guides → [GETTING-STARTED.md#platform](GETTING-STARTED.md)
+
+---
+
+## 🛠 Manual Quick Start
+
+### 1. Install
+
+```bash
+# Clone
 git clone https://github.com/JEO-tech-ai/oh-my-unity3d.git
-cd oh-my-unity3d/.unity-skills/jeo
+cd oh-my-unity3d
+
+# Install all skills
+bash .unity-skills/jeo/scripts/install.sh --all
 ```
 
-Install the full package:
+### 2. Set Up Your AI Platform
 
 ```bash
-bash scripts/install.sh --all
+bash .unity-skills/jeo/scripts/setup-claude.sh    # Claude Code
+bash .unity-skills/jeo/scripts/setup-codex.sh     # Codex CLI
+bash .unity-skills/jeo/scripts/setup-gemini.sh    # Gemini CLI
+bash .unity-skills/jeo/scripts/setup-opencode.sh  # OpenCode
 ```
 
-Check environment status:
+### 3. Connect Unity Editor (unity-mcp)
 
 ```bash
-bash scripts/check-status.sh
+# Auto-configure MCP for your platform
+bash .unity-skills/unity-mcp/scripts/setup.sh
+
+# In Unity Editor: Window → MCP → Start
+curl http://localhost:8080/health  # Verify connection
 ```
 
-Configure the tools you actually use:
+### 4. Run Your First Workflow
 
 ```bash
-bash scripts/setup-claude.sh
-bash scripts/setup-codex.sh
-bash scripts/setup-gemini.sh
-bash scripts/setup-opencode.sh
+jeo "씬 프로토타이핑: 내 첫 번째 게임"
 ```
 
-## Workflow Contract
+---
 
-### 1. Plan
+## 🎯 Unity3D Workflows
 
-Create `plan.md` and run the blocking plan gate:
+All workflows are orchestrated by `jeo` with an automatic Unity3D verification loop in the VERIFY phase.
 
-```bash
-bash scripts/plannotator-plan-loop.sh plan.md /tmp/plannotator_feedback.txt 3
+### Verification Loop (auto-runs in every VERIFY phase)
+
+```
+① run_tests     →  Unity Test Runner pass/fail
+② read_console  →  Error / Exception detection
+③ editor_state  →  Scene load state check
+④ Fix loop      →  Auto-retry up to 3× on failure
 ```
 
-Do not execute until the plan is approved.
+### Workflow Summary
 
-### 2. Execute
+| # | Workflow | Roles | Key Tools |
+|---|----------|-------|-----------|
+| 1 | **Scene Prototyping** | PM + Designer | `bmad-gds-gdd` → `manage_scene` → `manage_probuilder` |
+| 2 | **Story → C# Dev** | PM + Dev | `bmad-gds-dev-story` → `create_script` → `validate_script` |
+| 3 | **Asset Pipeline** | Designer + Dev | `manage_asset` → `manage_texture` → `batch_execute` |
+| 4 | **UI / Visual** | Designer | `design-system` → `manage_ui` → `manage_animation` |
+| 5 | **Perf & Debug** | Dev + QA | `read_console` → `find_gameobjects` → `batch_execute` |
 
-- Claude Code: `/omc:team 3:executor "<task>"`
-- Codex, Gemini CLI, OpenCode: `/workflow-init`
+> Full workflow details → [WORKFLOWS.md](WORKFLOWS.md)
 
-### 3. Verify
+---
 
-Use `agent-browser` when the task affects UI or browser behavior:
+## 🛠 unity-mcp Tools
 
-```bash
-agent-browser snapshot http://localhost:3000
-agent-browser screenshot http://localhost:3000 -o verify.png
+37 MCP tools for AI-driven Unity Editor control, mapped by role:
+
+<details>
+<summary><strong>PM Context</strong> — Sprint planning, story tracking</summary>
+
+| Tool / Resource | Scenario | Paired Skill |
+|----------------|----------|--------------|
+| `project_info` | Project status → sprint plan | `bmad-gds-sprint-planning` |
+| `get_tests` | Test coverage → release checklist | `bmad-gds-sprint-status` |
+| `editor_state` | Scene/build state → demo check | `task-planning` |
+| `read_console` | Bug reports → story creation | `log-analysis` |
+
+</details>
+
+<details>
+<summary><strong>Designer Context</strong> — UI/UX, visuals, prototyping</summary>
+
+| Tool | Scenario | Paired Skill |
+|------|----------|--------------|
+| `manage_ui` | UI hierarchy creation | `design-system`, `ui-component-patterns` |
+| `manage_material`, `manage_shader` | Visual style prototyping | `design-system` |
+| `manage_vfx`, `manage_animation` | Motion / effects iteration | `bmad-gds-quick-prototype` |
+| `manage_probuilder` | Level greyboxing | `bmad-gds-gdd` |
+| `manage_texture` | Asset import settings | `file-organization` |
+
+</details>
+
+<details>
+<summary><strong>Developer Context</strong> — Scripts, tests, optimization</summary>
+
+| Tool | Scenario | Paired Skill |
+|------|----------|--------------|
+| `create_script`, `validate_script` | C# generation + Roslyn validation | `bmad-gds-dev-story` |
+| `script_apply_edits` | Code apply after validation | `code-refactoring` |
+| `run_tests`, `get_test_job` | Unity Test Runner | `testing-strategies` |
+| `read_console` | Runtime error collection | `log-analysis` |
+| `batch_execute` | Batch ops 10–100× faster | `workflow-automation` |
+| `manage_gameobject`, `manage_components` | Scene object manipulation | `bmad-gds-quick-dev` |
+
+</details>
+
+---
+
+## 📚 Skills Index
+
+44 skills organized by category:
+
+### 🎮 Game Development (Unity3D)
+
+| Skill | Description | Usage |
+|-------|-------------|-------|
+| **unity-mcp** 🆕 | Unity Editor MCP bridge — 37 tools | Always with Unity3D work |
+| **bmad-gds** | Game dev studio: Brainstorm → GDD → Sprint → Dev → Review | Core workflow |
+| **bmad-idea** | Creative intelligence for ideation | Optional — new features |
+
+### 🔧 Orchestration
+
+| Skill | Description | Keyword |
+|-------|-------------|---------|
+| **jeo** | Plan → Execute → Verify → Cleanup pipeline | `jeo` |
+| **ralph** | Spec-first self-completing dev loop | `ralph` |
+| **plannotator** | Visual plan review gate | `plannotator` |
+
+### 🖥 Platform Setup
+
+| Skill | Platform | Keyword |
+|-------|----------|---------|
+| **omc** | Claude Code | `omc` |
+| **ohmg** | Gemini CLI | `ohmg` |
+| **omx** (was oh-my-codex) 🔄 | Codex CLI | `omx` |
+| **jeo** setup-opencode.sh | OpenCode | — |
+
+### 💻 Development
+
+`code-review` · `code-refactoring` · `backend-testing` · `testing-strategies` · `codebase-search` · `git-workflow` · `git-submodule` · `changelog-maintenance` · `api-design` · `api-documentation` · `security-best-practices` · `performance-optimization` · `pattern-detection` · `environment-setup` · `workflow-automation` · `file-organization`
+
+### 🎨 Design & UI
+
+`design-system` _(Unity3D Design Guide included)_ · `ui-component-patterns` · `web-accessibility` · `web-design-guidelines` · `responsive-design`
+
+### 📊 Infrastructure & Data
+
+`database-schema-design` · `log-analysis` · `data-analysis` · `llm-monitoring-dashboard` · `task-planning` · `task-estimation`
+
+### 🌟 Creative & Content
+
+`image-generation` · `video-production` · `marketing-skills-collection` · `pptx-presentation-builder` · `remotion-video-production` · `opencontext` · `prompt-repetition` · `vibe-kanban` · `ralphmode`
+
+> Full index with quick-select guide → [SKILLS-INDEX.md](SKILLS-INDEX.md)
+
+---
+
+## 🌐 Platform Support
+
+| Platform | Setup Skill | Planning | Execution | Verification |
+|----------|-------------|----------|-----------|--------------|
+| **Claude Code** | `omc` | `ralph` + `plannotator` hook | `omc` team mode | `agent-browser` + unity-mcp |
+| **Codex CLI** | `omx` | `plan.md` + `plannotator` loop | `bmad` fallback | `agent-browser` + unity-mcp |
+| **Gemini CLI** | `ohmg` | `plan.md` + AfterAgent hook | `bmad` or `ohmg` | `agent-browser` + unity-mcp |
+| **OpenCode** | `jeo` setup-opencode.sh | slash-command workflow | `omx` or `bmad` | `agent-browser` + unity-mcp |
+
+---
+
+## 📁 Repository Layout
+
+```
+oh-my-unity3d/
+├── README.md                    ← You are here
+├── SKILLS-INDEX.md              ← Full 44-skill directory
+├── GETTING-STARTED.md           ← Installation & first workflow
+├── WORKFLOWS.md                 ← 5 Unity3D workflow guides
+├── CLAUDE.md                    ← AI agent project context
+└── .unity-skills/
+    ├── jeo/                     ← JEO orchestration (core)
+    │   ├── SKILL.md
+    │   ├── SKILL.toon
+    │   ├── references/FLOW.md
+    │   └── scripts/             ← install, setup-*, check-status, ...
+    ├── unity-mcp/               ← Unity Editor MCP bridge 🆕
+    │   ├── SKILL.md
+    │   ├── SKILL.toon
+    │   └── scripts/setup.sh
+    ├── bmad-gds/                ← Game dev workflow
+    ├── bmad-idea/               ← Creative intelligence
+    ├── omc/                     ← Claude Code setup
+    ├── ohmg/                    ← Gemini CLI setup
+    ├── oh-my-codex/             ← Codex CLI setup (keyword: omx)
+    ├── ralph/                   ← Spec-first dev loop
+    ├── plannotator/             ← Plan review gate
+    └── [35 domain skills]/
 ```
 
-### 4. Cleanup
+---
 
-```bash
-bash scripts/worktree-cleanup.sh || git worktree prune
-```
+## 📖 Documentation
 
-## Version Notes
+| Document | Description |
+|----------|-------------|
+| [SKILLS-INDEX.md](SKILLS-INDEX.md) | 44-skill directory with categories, keywords, and quick-select guide |
+| [GETTING-STARTED.md](GETTING-STARTED.md) | Installation, platform setup, first workflow walkthrough |
+| [WORKFLOWS.md](WORKFLOWS.md) | 5 Unity3D workflows with step tables and quick-start examples |
+| [CLAUDE.md](CLAUDE.md) | AI agent project context — unity-mcp tools, JEO verify loop |
+| [.unity-skills/jeo/SKILL.md](.unity-skills/jeo/SKILL.md) | Full JEO orchestration reference |
+| [.unity-skills/unity-mcp/SKILL.md](.unity-skills/unity-mcp/SKILL.md) | unity-mcp tool reference (37 tools, role mappings) |
 
-### `v2.0.0`
+---
 
-- removed `agentation` integration and related keywords
-- reduced the skill to the supported release surface
-- aligned setup scripts with the new platform contract
-- rewrote the release docs around the actual package contents
+## 📋 Changelog
+
+### `v2.1.0` — Unity3D Integration Release
+
+- **Added** `unity-mcp` skill — Unity Editor MCP bridge with 37 tools, role-based mappings, and platform auto-setup script
+- **Added** Unity3D verification loop in JEO VERIFY phase (`run_tests → read_console → editor_state`, up to 3 retries)
+- **Added** 5 Unity3D workflow templates in `WORKFLOWS.md`
+- **Added** `SKILLS-INDEX.md` — 44-skill directory
+- **Added** `GETTING-STARTED.md` — onboarding guide with unity-mcp integration
+- **Added** `CLAUDE.md` — AI agent project context
+- **Added** Unity3D Design Guide to `design-system` skill
+- **Changed** `oh-my-codex` keyword renamed to `omx`
+- **Changed** OpenCode added as 4th supported platform across all documentation
+
+### `v2.0.0` — JEO Clean Release
+
+- Removed `agentation` integration and related keywords (`annotate`, `agentui`)
+- Reduced the skill to the supported release surface
+- Aligned setup scripts with the new platform contract
+- Rewrote release docs around actual package contents
+
+---
 
 ## License
 
-This repository is distributed under the license configured for `JEO-tech-ai/oh-my-unity3d`.
+MIT — see [LICENSE](LICENSE) for details.
+
+---
+
+<div align="center">
+Built with <a href="https://github.com/JEO-tech-ai/oh-my-unity3d">JEO</a> · Powered by <a href="https://github.com/CoplayDev/unity-mcp">unity-mcp</a>
+</div>
+]]>
