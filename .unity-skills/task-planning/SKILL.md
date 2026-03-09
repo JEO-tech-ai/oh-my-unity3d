@@ -259,3 +259,41 @@ Done:
 
 ### Example 2: Advanced usage
 <!-- Add advanced example content here -->
+
+## Quick Start
+
+Unity3D 스프린트 계획 시나리오 (`bmad-gds-sprint-planning` 연동):
+
+```markdown
+## Sprint 4 Planning (Unity3D - JEO Workflow 2)
+
+**스프린트 목표**: 전투 시스템 MVP 완성
+
+**bmad-gds-sprint-planning 입력**:
+- GDD 섹션: "전투 메카닉 v2.1"
+- 팀 용량: 2명 × 40h = 80h
+- 목표 벨로시티: 20 스토리 포인트
+
+### 선택된 스토리 (bmad-gds-create-story 형식)
+1. 플레이어 기본 공격 구현 (5pt) - Must Have
+   - Tasks: AnimationController 연동, Collider 설정, 데미지 계산
+2. 적 AI 상태머신 (8pt) - Must Have
+   - Tasks: StateMachine 클래스, Patrol/Chase/Attack 상태
+3. HP 바 UI 구현 (3pt) - Should Have
+   - Tasks: WorldSpace Canvas, 체력 연동
+4. 피격 이펙트 (2pt) - Could Have
+   - Tasks: ParticleSystem 풀링, 색상 플래시
+
+**총계**: 18pt
+
+### Definition of Done (Unity3D)
+- [ ] Play Mode 테스트 통과
+- [ ] unity-mcp read_console 에러 없음
+- [ ] 60fps 유지 (Profiler 확인)
+```
+
+## Workflow Context
+
+bmad-gds 스프린트 계획과 연동하여 Unity3D 개발 태스크를 구조화합니다.
+- **트리거**: JEO Workflow 2 (스프린트 스토리 → C# 구현) PLAN 단계
+- **연동**: `bmad-gds-sprint-planning` → `task-planning` → `bmad-gds-create-story`

@@ -320,3 +320,9 @@ project/
 
 ### Example 2: Advanced usage
 <!-- Add advanced example content here -->
+
+## Workflow Context
+
+Unity3D 반복 작업을 자동화합니다. unity-mcp: batch_execute와 함께 사용합니다.
+- **트리거**: JEO Workflow 3 (에셋 파이프라인) EXECUTE 단계
+- **연동**: `workflow-automation` + `unity-mcp: batch_execute` → 10~100x 속도 향상

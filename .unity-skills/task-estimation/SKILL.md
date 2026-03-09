@@ -223,3 +223,40 @@ const final = adjustEstimate(task);  // 5 * 1.3 * 1.2 = 7.8 → 8 points
 
 ### Example 2: Advanced usage
 <!-- Add advanced example content here -->
+
+## Quick Start
+
+Unity3D 스프린트 스토리 추정 시나리오 (`bmad-gds` 연동):
+
+```markdown
+## Sprint 3 Story Estimation (Unity3D)
+
+### Story: 플레이어 대시 능력 구현
+
+bmad-gds 컨텍스트:
+- GDD 참조: "대시 쿨다운 1.5초, 무적 프레임 10f"
+- 기술 스택: C# MonoBehaviour, Physics2D, InputSystem
+
+Story Point 산정:
+- 기본 대시 이동 로직: 3점 (C# + Physics2D)
+- 쿨다운 시스템: 2점 (TimerManager 연동)
+- 무적 프레임 + 레이어 마스크: 3점 (충돌 처리 복잡)
+- 이펙트 연동 (ParticleSystem): 2점
+- 유닛 테스트 작성: 1점
+
+합계: 11점 → 분리 권장 (13점 미만)
+
+리스크:
+- Physics2D 상호작용 예측 어려움 (medium risk) → x1.3
+- InputSystem 레거시 충돌 가능 (low risk)
+
+최종 추정: 8점 (분리 후 1차 구현)
+
+→ bmad-gds-sprint-planning에 전달
+```
+
+## Workflow Context
+
+Unity3D 스토리 복잡도를 추정하고 스프린트 용량을 계획합니다.
+- **트리거**: JEO Workflow 2 PLAN 단계, bmad-gds-sprint-planning 전
+- **연동**: `task-estimation` → `bmad-gds-sprint-planning` → `bmad-gds-create-story`

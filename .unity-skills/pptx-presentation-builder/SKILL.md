@@ -21,6 +21,46 @@ allowed-tools:
 
 ---
 
+## Quick Start — Unity3D 게임 피치덱
+
+인디 게임 스튜디오가 투자자에게 Unity3D 모바일 게임 프로젝트를 소개하는 피치덱:
+
+```bash
+pptx-presentation-builder "Unity3D 게임 피치덱"
+```
+
+**입력 컨텍스트**:
+```yaml
+deck_brief:
+  title: "[게임명] — 모바일 RPG 피치덱"
+  audience: 게임 전문 VC, 퍼블리셔
+  goal: 시드 투자 유치 (목표: $500K)
+  duration: 10분 발표 + 5분 Q&A
+  slides: 10장
+  brand:
+    primary_color: "#1A1A2E"   # 다크 판타지 테마
+    accent_color: "#E94560"
+    font: "Rajdhani"
+```
+
+**생성되는 슬라이드 구성**:
+| # | 슬라이드 | 핵심 메시지 |
+|---|---------|------------|
+| 1 | 타이틀 | 게임명 + 장르 + 태그라인 |
+| 2 | 시장 기회 | 모바일 RPG 시장 규모 ($XX B) |
+| 3 | 게임 소개 | 핵심 게임플레이 루프 |
+| 4 | 차별점 | Unity3D 기술적 강점 |
+| 5 | 스크린샷 | 인게임 비주얼 3장 |
+| 6 | 수익 모델 | IAP, 광고, 구독 구조 |
+| 7 | 트랙션 | 베타 지표 (DAU, 리텐션) |
+| 8 | 팀 | 핵심 멤버 + Unity 경력 |
+| 9 | 로드맵 | 론칭 ~ 스케일 타임라인 |
+| 10 | Ask | 투자 금액 + 사용 계획 |
+
+**예상 산출물**: 슬라이드별 콘텐츠 + 스피커 노트 + 브랜드 토큰 정의 + 핸드오프 패키지
+
+---
+
 ## Instructions
 
 ### Step 1: Gather Brand Constraints

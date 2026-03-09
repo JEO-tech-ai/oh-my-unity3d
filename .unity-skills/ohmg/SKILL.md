@@ -23,6 +23,29 @@ metadata:
 
 ---
 
+## Quick Start
+
+**Scenario: Platform setup for a Unity3D project**
+
+```bash
+# Step 1: Install oh-my-ag
+bunx oh-my-ag
+# Select "Unity3D" when prompted for project type
+```
+
+```bash
+# Step 2: Verify system is ready
+bunx oh-my-ag doctor
+```
+
+```bash
+# Step 3: Launch the monitoring dashboard and spawn your first agent
+bunx oh-my-ag dashboard &
+oh-my-ag agent:spawn backend "Set up Unity3D build pipeline" session-unity-01
+```
+
+---
+
 ## 1. Core Concepts
 
 ### Specialized Agents

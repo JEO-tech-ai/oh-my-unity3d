@@ -532,3 +532,9 @@ git log --grep="feature name"
 
 ### Example 2: Advanced usage
 <!-- Add advanced example content here -->
+
+## Workflow Context
+
+Unity3D C# 스크립트와 에셋에서 패턴을 검색합니다.
+- **트리거**: JEO Workflow 5 (성능 최적화) PLAN 단계
+- **연동**: `codebase-search` + `unity-mcp: find_in_file` → 문제 코드 탐색 → `performance-optimization`

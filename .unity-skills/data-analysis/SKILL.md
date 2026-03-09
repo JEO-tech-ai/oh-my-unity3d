@@ -221,3 +221,37 @@ segments['avg_order_value'] = segments['revenue'] / segments['orders']
 
 ### Example 2: Advanced usage
 <!-- Add advanced example content here -->
+
+## Quick Start
+
+Unity3D 성능 데이터 분석 시나리오:
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 1. Unity Profiler CSV 데이터 로드
+df = pd.read_csv('unity_profiler_output.csv')
+
+# 2. 프레임 타임 분석
+print(df[['Frame', 'CPU', 'GPU', 'Memory']].describe())
+
+# 3. 병목 구간 탐지 (16.67ms = 60fps 기준)
+slow_frames = df[df['CPU'] > 16.67]
+print(f"드랍 프레임 수: {len(slow_frames)} / {len(df)}")
+
+# 4. 가장 무거운 함수 Top 10
+top_functions = df.groupby('FunctionName')['CPUTime'].sum()
+top_functions = top_functions.nlargest(10)
+print(top_functions)
+
+# 5. 메모리 추세 시각화
+plt.figure(figsize=(12, 6))
+df.groupby('Frame')['Memory'].mean().plot()
+plt.title('Unity Memory Usage Over Time')
+plt.xlabel('Frame')
+plt.ylabel('Memory (MB)')
+plt.savefig('unity_memory_trend.png')
+```
+
+**분석 결과 → performance-optimization 스킬로 연동**

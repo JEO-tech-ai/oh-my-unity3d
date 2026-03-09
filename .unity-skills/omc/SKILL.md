@@ -44,6 +44,28 @@ autopilot: build a REST API for managing tasks
 
 ---
 
+## Quick Start
+
+**Scenario: Platform setup for a Unity3D project**
+
+```bash
+# Step 1: Install omc into your Unity3D project
+/plugin marketplace add https://github.com/Yeachan-Heo/oh-my-claudecode
+/plugin install oh-my-claudecode
+```
+
+```bash
+# Step 2: Run setup
+/omc:omc-setup
+```
+
+```text
+# Step 3: Verify — run your first Unity3D task
+autopilot: implement a singleton GameManager for Unity3D
+```
+
+---
+
 ## 2. Orchestration Modes
 
 | Mode | What it is | Use For |

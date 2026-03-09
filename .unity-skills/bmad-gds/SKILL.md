@@ -109,6 +109,43 @@ Unity · Unreal Engine · Godot · Custom/Other
 
 ---
 
+## Quick Start
+
+**Scenario: New Unity3D game — from concept to first sprint**
+
+```bash
+# Step 0: Confirm unity-mcp is running before starting
+npx unity-mcp status
+```
+
+```text
+Step 1 — bmad-gds-brainstorm-game
+  → "mobile endless runner on Unity3D with procedural obstacles"
+
+Step 2 — bmad-gds-game-brief
+  → Lock in core loop: run, dodge, score
+
+Step 3 — bmad-gds-gdd
+  → Full GDD: mechanics, progression, power-up systems
+
+Step 4 — bmad-gds-game-architecture
+  → Unity3D architecture: ScriptableObject data layer, pooling, input
+
+Step 5 — bmad-gds-test-framework
+  → Initialize Unity Test Runner + EditMode/PlayMode scaffolding
+
+Step 6 — bmad-gds-sprint-planning
+  → Break epics into Unity3D dev stories
+
+Step 7 — bmad-gds-dev-story
+  → Implement story: "Player controller with physics-based movement"
+
+Step 8 — bmad-gds-code-review
+  → QA gate before merging to main
+```
+
+---
+
 ## Typical Workflow
 
 1. Run `bmad-gds-brainstorm-game` → ideate game concept

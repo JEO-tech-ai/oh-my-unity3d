@@ -23,6 +23,30 @@ metadata:
 
 ---
 
+## Quick Start
+
+**Scenario: Platform setup for a Unity3D project**
+
+```bash
+# Step 1: Install oh-my-codex
+npm install -g oh-my-codex
+omx setup
+```
+
+```bash
+# Step 2: Confirm diagnostics pass
+omx doctor
+```
+
+```bash
+# Step 3: Launch and run your first Unity3D task
+omx --xhigh --madmax
+# Then inside Codex:
+# $autopilot "scaffold a Unity3D input handler using the new Input System"
+```
+
+---
+
 ## 1. Core Concepts
 
 ### Role Prompts (30 Agents)

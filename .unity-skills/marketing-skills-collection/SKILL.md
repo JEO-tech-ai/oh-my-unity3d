@@ -23,6 +23,39 @@ allowed-tools:
 
 ---
 
+## Quick Start — Unity3D 게임 마케팅 시나리오
+
+Unity3D 모바일 RPG 출시를 앞두고 스팀/앱스토어 런칭 캠페인을 준비하는 상황:
+
+```
+# 1. 런칭 전략 수립
+marketing-skills-collection launch-strategy
+→ 게임 장르: 모바일 RPG
+→ 타겟: 18-35세 캐주얼 게이머
+→ 채널: App Store, Google Play, Steam
+
+# 2. 앱스토어 카피 작성
+marketing-skills-collection copywriting
+→ 앱 설명 (4000자 이내), 키워드 최적화 포함
+
+# 3. SEO 블로그 콘텐츠
+marketing-skills-collection seo-audit
+→ 키워드: "Unity3D RPG 게임", "모바일 RPG 추천"
+
+# 4. 소셜 미디어 런칭 시리즈
+marketing-skills-collection social-content
+→ 플랫폼: Instagram, TikTok, Twitter/X
+→ 런칭 D-7 ~ D+3 스케줄
+
+# 5. 리텐션 이메일 시퀀스
+marketing-skills-collection email-sequence
+→ 설치 후 7일 활성화 시퀀스 (5통)
+```
+
+**예상 산출물**: 런칭 전략 문서, 앱스토어 카피 3종, SEO 포스트 2개, 소셜 캘린더, 이메일 시퀀스 5통
+
+---
+
 ## 23 Sub-Skills Overview
 
 ### CRO (Conversion Rate Optimization)

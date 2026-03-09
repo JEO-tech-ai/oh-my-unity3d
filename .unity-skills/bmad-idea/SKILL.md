@@ -32,6 +32,24 @@ npx skills add https://github.com/supercent-io/skills-template --skill bmad-idea
 
 ---
 
+## Quick Start
+
+**Scenario: New Unity3D game feature ideation**
+
+```text
+# Step 1: Run a brainstorming session focused on your feature area
+bmad-cis-brainstorming
+→ "What engaging progression mechanics could we add to our Unity3D mobile RPG?"
+```
+
+```text
+# Step 2: Turn the best idea into a structured design with design thinking
+bmad-cis-design-thinking
+→ Empathy map → problem definition → prototype concept for the chosen mechanic
+```
+
+---
+
 ## Creative Workflows
 
 All workflows are available immediately — no sequential phases required.

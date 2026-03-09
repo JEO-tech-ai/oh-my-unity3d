@@ -167,3 +167,37 @@ grep -E "POST.*/login" access.log | awk '{print $1}' | sort | uniq -c | sort -rn
 
 ### Example 2: Advanced usage
 <!-- Add advanced example content here -->
+
+## Quick Start
+
+Unity3D 콘솔 로그 분석 시나리오 (`unity-mcp: read_console` 사용):
+
+```
+1. unity-mcp로 콘솔 출력 수집
+   unity-mcp: read_console → Error/Warning/Exception 목록
+
+2. 에러 패턴 분류
+   - NullReferenceException: 컴포넌트 참조 누락
+   - MissingReferenceException: 오브젝트 파괴 후 접근
+   - IndexOutOfRangeException: 배열 범위 초과
+
+3. 분석 실행
+   Grep: "NullReferenceException" in read_console output
+   → 발생 빈도 및 호출 스택 정리
+
+4. 수정 우선순위 결정
+   - Critical (게임 크래시): 즉시 수정
+   - High (기능 오류): 이번 스프린트 내 처리
+   - Low (경고): 다음 스프린트로 이관
+
+5. 스토리 생성
+   → bmad-gds-create-story 입력으로 전달
+```
+
+## Workflow Context
+
+JEO VERIFY loop에서 `unity-mcp: read_console` 출력을 분석합니다.
+- **트리거**: JEO Workflow 2 (C# 구현), Workflow 5 (성능 최적화) VERIFY 단계
+- **입력**: unity-mcp read_console 출력 (Error/Warning/Exception)
+- **출력**: 에러 분류 + 수정 우선순위 + bmad-gds-create-story 입력
+- **연동**: `jeo` → `unity-mcp` → `log-analysis` → `bmad-gds-create-story`

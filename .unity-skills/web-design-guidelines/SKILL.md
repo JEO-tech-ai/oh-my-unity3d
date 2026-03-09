@@ -138,3 +138,29 @@ If no files specified, ask the user which files to review.
 
 ### Tags
 `#UI` `#review` `#web-interface` `#guidelines` `#vercel` `#design-audit` `#UX` `#frontend`
+
+## Quick Start
+
+Unity3D UI 리뷰 시나리오 (`design-system` 연동):
+
+```
+1. 리뷰 대상 파일 지정 (Unity3D UI 스크립트)
+   Pattern: Assets/UI/**/*.cs, Assets/UI/**/*.uxml
+
+2. design-system 스킬로 Unity3D 디자인 토큰 확인
+   - 색상 팔레트, 타이포그래피, 스페이싱 기준
+
+3. web-design-guidelines로 UI 코드 분석
+   WebFetch: https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md
+
+4. Unity3D UI 특화 체크리스트
+   - [ ] UIToolkit 접근성: focusable 속성 설정
+   - [ ] 해상도 대응: flex-wrap, relative 단위 사용
+   - [ ] 터치 타겟: 최소 44x44px (모바일 빌드)
+   - [ ] 색상 대비: WCAG AA 기준 (4.5:1 이상)
+   - [ ] 폰트 가독성: 최소 14sp
+
+5. 결과 출력 (file:line 형식)
+   Assets/UI/HUD.uxml:23 - 버튼 터치 타겟이 44px 미만
+   Assets/UI/Inventory.cs:67 - 색상 하드코딩, design-system 토큰으로 교체 권장
+```
