@@ -1,4 +1,4 @@
-<![CDATA[# 🎮 oh-my-unity3d
+# 🎮 oh-my-unity3d
 
 <div align="center">
 
@@ -323,4 +323,3 @@ MIT — see [LICENSE](LICENSE) for details.
 <div align="center">
 Built with <a href="https://github.com/JEO-tech-ai/oh-my-unity3d">JEO</a> · Powered by <a href="https://github.com/CoplayDev/unity-mcp">unity-mcp</a>
 </div>
-]]>
