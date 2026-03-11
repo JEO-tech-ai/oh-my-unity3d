@@ -21,6 +21,8 @@ Check which AI platforms are installed and set the installation root:
 ```bash
 # skills CLI v1.x installs to ~/.agents/skills/ and symlinks to all platform paths
 SKILLS_ROOT="$HOME/.agents/skills"
+REPO_URL="https://github.com/JEO-tech-ai/oh-my-unity3d"
+REPO_SLUG="JEO-tech-ai/oh-my-unity3d"
 
 # Detect available platforms
 echo "=== Platform Detection ==="
@@ -45,16 +47,16 @@ npm install -g skills
 # --global: install to all detected platforms, overwrite existing versions
 
 # Core orchestration
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill jeo --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ralph --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill plannotator --yes --global
+npx skills add "$REPO_URL" --skill jeo --yes --global
+npx skills add "$REPO_URL" --skill ralph --yes --global
+npx skills add "$REPO_URL" --skill plannotator --yes --global
 
 # Unity3D integration (required for Unity projects)
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill unity-mcp --yes --global
+npx skills add "$REPO_URL" --skill unity-mcp --yes --global
 
 # Game development workflow
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill bmad-gds --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill bmad-idea --yes --global
+npx skills add "$REPO_URL" --skill bmad-gds --yes --global
+npx skills add "$REPO_URL" --skill bmad-idea --yes --global
 ```
 
 ---
@@ -67,53 +69,53 @@ Install all 44 available skills:
 
 ```bash
 # Platform setup skills
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill omc          --yes --global  # Claude Code
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ohmg         --yes --global  # Gemini CLI
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill oh-my-codex  --yes --global  # Codex CLI (keyword: omx)
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ralphmode     --yes --global
+npx skills add "$REPO_URL" --skill omc          --yes --global  # Claude Code
+npx skills add "$REPO_URL" --skill ohmg         --yes --global  # Gemini CLI
+npx skills add "$REPO_URL" --skill oh-my-codex  --yes --global  # Codex CLI (keyword: omx)
+npx skills add "$REPO_URL" --skill ralphmode    --yes --global
 
 # Development
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill code-review           --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill code-refactoring      --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill backend-testing       --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill testing-strategies    --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill codebase-search       --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill git-workflow          --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill git-submodule         --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill changelog-maintenance --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill api-design            --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill api-documentation     --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill security-best-practices  --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill performance-optimization --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill pattern-detection     --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill environment-setup     --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill workflow-automation   --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill file-organization     --yes --global
+npx skills add "$REPO_URL" --skill code-review           --yes --global
+npx skills add "$REPO_URL" --skill code-refactoring      --yes --global
+npx skills add "$REPO_URL" --skill backend-testing       --yes --global
+npx skills add "$REPO_URL" --skill testing-strategies    --yes --global
+npx skills add "$REPO_URL" --skill codebase-search       --yes --global
+npx skills add "$REPO_URL" --skill git-workflow          --yes --global
+npx skills add "$REPO_URL" --skill git-submodule         --yes --global
+npx skills add "$REPO_URL" --skill changelog-maintenance --yes --global
+npx skills add "$REPO_URL" --skill api-design            --yes --global
+npx skills add "$REPO_URL" --skill api-documentation     --yes --global
+npx skills add "$REPO_URL" --skill security-best-practices  --yes --global
+npx skills add "$REPO_URL" --skill performance-optimization --yes --global
+npx skills add "$REPO_URL" --skill pattern-detection     --yes --global
+npx skills add "$REPO_URL" --skill environment-setup     --yes --global
+npx skills add "$REPO_URL" --skill workflow-automation   --yes --global
+npx skills add "$REPO_URL" --skill file-organization     --yes --global
 
 # Design & UI
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill design-system         --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill ui-component-patterns --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill web-accessibility     --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill web-design-guidelines --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill responsive-design     --yes --global
+npx skills add "$REPO_URL" --skill design-system         --yes --global
+npx skills add "$REPO_URL" --skill ui-component-patterns --yes --global
+npx skills add "$REPO_URL" --skill web-accessibility     --yes --global
+npx skills add "$REPO_URL" --skill web-design-guidelines --yes --global
+npx skills add "$REPO_URL" --skill responsive-design     --yes --global
 
 # Infrastructure & Data
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill database-schema-design --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill log-analysis           --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill data-analysis          --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill llm-monitoring-dashboard --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill task-planning          --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill task-estimation        --yes --global
+npx skills add "$REPO_URL" --skill database-schema-design --yes --global
+npx skills add "$REPO_URL" --skill log-analysis           --yes --global
+npx skills add "$REPO_URL" --skill data-analysis          --yes --global
+npx skills add "$REPO_URL" --skill llm-monitoring-dashboard --yes --global
+npx skills add "$REPO_URL" --skill task-planning          --yes --global
+npx skills add "$REPO_URL" --skill task-estimation        --yes --global
 
 # Creative & Content
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill image-generation           --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill video-production           --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill marketing-skills-collection --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill pptx-presentation-builder  --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill remotion-video-production  --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill opencontext               --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill prompt-repetition         --yes --global
-npx skills add https://github.com/JEO-tech-ai/oh-my-unity3d --skill vibe-kanban               --yes --global
+npx skills add "$REPO_URL" --skill image-generation           --yes --global
+npx skills add "$REPO_URL" --skill video-production           --yes --global
+npx skills add "$REPO_URL" --skill marketing-skills-collection --yes --global
+npx skills add "$REPO_URL" --skill pptx-presentation-builder  --yes --global
+npx skills add "$REPO_URL" --skill remotion-video-production  --yes --global
+npx skills add "$REPO_URL" --skill opencontext                --yes --global
+npx skills add "$REPO_URL" --skill prompt-repetition          --yes --global
+npx skills add "$REPO_URL" --skill vibe-kanban                --yes --global
 ```
 
 ---
@@ -167,6 +169,14 @@ for skill in jeo unity-mcp bmad-gds ralph plannotator omc; do
     && echo "✅ $skill" \
     || echo "❌ $skill — re-run: npx skills add ... --skill $skill"
 done
+
+# Star the source repository when GitHub CLI auth is available
+if command -v gh &>/dev/null && gh auth status &>/dev/null; then
+  gh repo star "$REPO_SLUG"
+  echo "✅ Starred $REPO_SLUG"
+else
+  echo "⬜ GitHub star skipped — install/authenticate gh, then run: gh repo star $REPO_SLUG"
+fi
 ```
 
 ---
