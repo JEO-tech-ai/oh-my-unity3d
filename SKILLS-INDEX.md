@@ -1,6 +1,6 @@
 # oh-my-unity3d Skills Index
 
-44개 스킬 라이브러리 — JEO 오케스트레이션 생태계
+44개 스킬 라이브러리 — OMU 오케스트레이션 생태계
 
 ## 플랫폼 초기 설정
 
@@ -9,13 +9,13 @@
 | omc | Claude Code | 팀·에이전트·훅 구성 | omc |
 | ohmg | Gemini CLI | 훅·GEMINI.md 구성 | ohmg |
 | omx | Codex CLI | developer_instructions·notify 훅 | omx |
-| jeo | OpenCode | setup-opencode.sh 경유 | jeo |
+| omu | OpenCode | setup-opencode.sh 경유 | omu |
 
 ## 오케스트레이션 (핵심)
 
 | 스킬 | 설명 | 키워드 | Unity3D |
 |------|------|--------|---------|
-| jeo | Plan→Execute→Verify→Cleanup 통합 워크플로우 | jeo | ✅ 검증 루프 |
+| omu | Plan→Execute→Verify→Cleanup 통합 워크플로우 | omu | ✅ 검증 루프 |
 | ralph | 명세 기반 자기완결 개발 루프 | ralph | - |
 | plannotator | 계획 시각적 리뷰·승인 게이트 | plannotator | - |
 | unity-mcp | Unity Editor MCP 연동 (37개 도구) | unity-mcp | ✅ 핵심 |
@@ -96,7 +96,7 @@
 | 상황 | 추천 스킬 |
 |------|----------|
 | Unity3D 게임 개발 시작 | `bmad-gds` + `unity-mcp` |
-| AI 워크플로우 오케스트레이션 | `jeo` |
+| AI 워크플로우 오케스트레이션 | `omu` |
 | 새 아이디어 발산 | `bmad-idea` |
 | Claude Code 초기 설정 | `omc` |
 | Gemini CLI 초기 설정 | `ohmg` |

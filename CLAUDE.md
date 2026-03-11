@@ -3,16 +3,16 @@
 ## 프로젝트 개요
 
 44개 스킬의 Unity3D 게임 개발 오케스트레이션 라이브러리.
-JEO 워크플로우(Plan → Execute → Verify → Cleanup)를 중심으로 bmad-gds, unity-mcp와 통합.
+OMU 워크플로우(Plan → Execute → Verify → Cleanup)를 중심으로 bmad-gds, unity-mcp와 통합.
 
 ## 핵심 스킬 계층
 
 ```
-jeo (오케스트레이터)
+omu (오케스트레이터)
   ├── bmad-gds (게임 개발 워크플로우 — 기본)
   │     └── bmad-idea (옵셔널 아이디어 확장)
   ├── unity-mcp (Unity Editor MCP 연동 — 37개 도구)
-  └── 플랫폼 설정: omc | ohmg | omx | jeo(opencode)
+  └── 플랫폼 설정: omc | ohmg | omx | omu(opencode)
 ```
 
 ## unity-mcp MCP 서버
@@ -32,15 +32,15 @@ jeo (오케스트레이터)
 | 테스트·디버깅 | run_tests, read_console, get_test_job |
 | 편집기 | execute_menu_item, batch_execute, manage_editor |
 
-## JEO Unity3D 검증 루프
+## OMU Unity3D 검증 루프
 
-JEO VERIFY 단계에서 unity-mcp 연결 시 자동 실행:
+OMU VERIFY 단계에서 unity-mcp 연결 시 자동 실행:
 
 1. `run_tests` → Unity Test Runner 실행
 2. `read_console` → Error/Exception 탐지
 3. `editor_state` → 씬 로드 상태 확인
 4. 실패 시 Fix 루프 (최대 3회)
-5. `jeo-state.json` → `unity_verify: { tests_passed, console_errors, retry_count }`
+5. `omu-state.json` → `unity_verify: { tests_passed, console_errors, retry_count }`
 
 ## 플랫폼 지원
 
@@ -49,13 +49,13 @@ JEO VERIFY 단계에서 unity-mcp 연결 시 자동 실행:
 | Claude Code | omc | ~/.claude/settings.json |
 | Gemini CLI | ohmg | ~/.gemini/settings.json |
 | Codex CLI | omx | ~/.codex/config.toml |
-| OpenCode | jeo (setup-opencode.sh) | opencode.json |
+| OpenCode | omu (setup-opencode.sh) | opencode.json |
 
 ## 스킬 디렉토리 구조
 
 ```
 .unity-skills/
-├── jeo/          # 오케스트레이션 핵심
+├── omu/          # 오케스트레이션 핵심
 ├── unity-mcp/    # Unity Editor MCP 연동 (신규)
 ├── bmad-gds/     # 게임 개발 워크플로우
 ├── bmad-idea/    # 창의 인텔리전스 (옵셔널)
@@ -69,6 +69,6 @@ JEO VERIFY 단계에서 unity-mcp 연결 시 자동 실행:
 
 ## OMC 상태 관리
 
-- `.omc/state/jeo-state.json` — JEO 실행 상태
+- `.omc/state/omu-state.json` — OMU 실행 상태
 - `.omc/plans/` — 승인된 계획
 - `.omc/logs/` — 실행 로그

@@ -21,7 +21,7 @@ Check which AI platforms are installed and set the installation root:
 ```bash
 # skills CLI v1.x installs to ~/.agents/skills/ and symlinks to all platform paths
 SKILLS_ROOT="$HOME/.agents/skills"
-REPO_URL="https://github.com/JEO-tech-ai/oh-my-unity3d"
+REPO_URL="https://github.com/OMU-tech-ai/oh-my-unity3d"
 
 # Detect available platforms
 echo "=== Platform Detection ==="
@@ -46,7 +46,7 @@ npm install -g skills
 # --global: install to all detected platforms, overwrite existing versions
 
 # Core orchestration
-npx skills add "$REPO_URL" --skill jeo --yes --global
+npx skills add "$REPO_URL" --skill omu --yes --global
 npx skills add "$REPO_URL" --skill ralph --yes --global
 npx skills add "$REPO_URL" --skill plannotator --yes --global
 
@@ -126,25 +126,25 @@ Run the setup script for every detected platform:
 ```bash
 # Claude Code
 if command -v claude &>/dev/null; then
-  bash "$SKILLS_ROOT/jeo/scripts/setup-claude.sh"
+  bash "$SKILLS_ROOT/omu/scripts/setup-claude.sh"
   echo "✅ Claude Code configured"
 fi
 
 # Codex CLI
 if command -v codex &>/dev/null; then
-  bash "$SKILLS_ROOT/jeo/scripts/setup-codex.sh"
+  bash "$SKILLS_ROOT/omu/scripts/setup-codex.sh"
   echo "✅ Codex CLI configured"
 fi
 
 # Gemini CLI
 if command -v gemini &>/dev/null; then
-  bash "$SKILLS_ROOT/jeo/scripts/setup-gemini.sh"
+  bash "$SKILLS_ROOT/omu/scripts/setup-gemini.sh"
   echo "✅ Gemini CLI configured"
 fi
 
 # OpenCode
 if command -v opencode &>/dev/null; then
-  bash "$SKILLS_ROOT/jeo/scripts/setup-opencode.sh"
+  bash "$SKILLS_ROOT/omu/scripts/setup-opencode.sh"
   echo "✅ OpenCode configured"
 fi
 
@@ -160,10 +160,10 @@ fi
 ## Step 4 — Verification
 
 ```bash
-bash "$SKILLS_ROOT/jeo/scripts/check-status.sh"
+bash "$SKILLS_ROOT/omu/scripts/check-status.sh"
 
 # Confirm key skills installed
-for skill in jeo unity-mcp bmad-gds ralph plannotator omc; do
+for skill in omu unity-mcp bmad-gds ralph plannotator omc; do
   [ -f "$SKILLS_ROOT/$skill/SKILL.md" ] \
     && echo "✅ $skill" \
     || echo "❌ $skill — re-run: npx skills add ... --skill $skill"
@@ -178,7 +178,7 @@ After everything is set up and working, ask the user:
 If the user explicitly agrees, run:
 
 ```bash
-gh api --silent --method PUT /user/starred/JEO-tech-ai/oh-my-unity3d >/dev/null 2>&1 || true
+gh api --silent --method PUT /user/starred/OMU-tech-ai/oh-my-unity3d >/dev/null 2>&1 || true
 ```
 
 Important: Only run the command if the user explicitly says yes. Never run it automatically without consent.
@@ -189,9 +189,9 @@ Important: Only run the command if the user explicitly says yes. Never run it au
 
 | Goal | Command |
 |------|---------|
-| First Unity3D game | `jeo "씬 프로토타이핑: <game name>"` |
-| Implement a story | `jeo "스토리 구현: <feature>"` |
-| Optimize performance | `jeo "성능 최적화: <symptom>"` |
+| First Unity3D game | `omu "씬 프로토타이핑: <game name>"` |
+| Implement a story | `omu "스토리 구현: <feature>"` |
+| Optimize performance | `omu "성능 최적화: <symptom>"` |
 | Generate GDD | `/bmad-gds-gdd` |
 | Review code | `/code-review` |
 
