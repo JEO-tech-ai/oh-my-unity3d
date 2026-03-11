@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-2.3.0-blue?style=flat-square)](https://github.com/___OMUTECHAI___/oh-my-unity3d/releases)
+[![Version](https://img.shields.io/badge/version-2.3.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?style=flat-square&logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-orange?style=flat-square)](https://claude.ai)
@@ -82,7 +82,7 @@ Send this to your LLM agent to begin the full installation:
 
 ```bash
 # Read the full installation guide and proceed automatically
-curl -s https://raw.githubusercontent.com/___OMUTECHAI___/oh-my-unity3d/main/setup-all-skills-prompt.md
+curl -s https://raw.githubusercontent.com/JEO-tech-ai/oh-my-unity3d/main/setup-all-skills-prompt.md
 ```
 
 More skill installs → [GETTING-STARTED.md](GETTING-STARTED.md) · Platform-specific guides → [GETTING-STARTED.md#platform](GETTING-STARTED.md)
@@ -95,7 +95,7 @@ More skill installs → [GETTING-STARTED.md](GETTING-STARTED.md) · Platform-spe
 
 ```bash
 # Clone
-git clone https://github.com/___OMUTECHAI___/oh-my-unity3d.git
+git clone https://github.com/JEO-tech-ai/oh-my-unity3d.git
 cd oh-my-unity3d
 
 # Install all skills
@@ -350,5 +350,5 @@ MIT — see [LICENSE](LICENSE) for details.
 ---
 
 <div align="center">
-Built with <a href="https://github.com/___OMUTECHAI___/oh-my-unity3d">OMU</a> · Powered by <a href="https://github.com/CoplayDev/unity-mcp">unity-mcp</a>
+Built with <a href="https://github.com/JEO-tech-ai/oh-my-unity3d">OMU</a> · Powered by <a href="https://github.com/CoplayDev/unity-mcp">unity-mcp</a>
 </div>

@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-2.3.0-blue?style=flat-square)](https://github.com/___OMUTECHAI___/oh-my-unity3d/releases)
+[![Version](https://img.shields.io/badge/version-2.3.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?style=flat-square&logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-orange?style=flat-square)](https://claude.ai)
@@ -82,7 +82,7 @@ npm install -g skills
 
 ```bash
 # 전체 설치 가이드를 읽고 자동으로 진행
-curl -s https://raw.githubusercontent.com/___OMUTECHAI___/oh-my-unity3d/main/setup-all-skills-prompt.md
+curl -s https://raw.githubusercontent.com/JEO-tech-ai/oh-my-unity3d/main/setup-all-skills-prompt.md
 ```
 
 추가 스킬 설치 → [GETTING-STARTED.md](GETTING-STARTED.md) · 플랫폼별 가이드 → [GETTING-STARTED.md#platform](GETTING-STARTED.md)
@@ -95,7 +95,7 @@ curl -s https://raw.githubusercontent.com/___OMUTECHAI___/oh-my-unity3d/main/set
 
 ```bash
 # 클론
-git clone https://github.com/___OMUTECHAI___/oh-my-unity3d.git
+git clone https://github.com/JEO-tech-ai/oh-my-unity3d.git
 cd oh-my-unity3d
 
 # 전체 스킬 설치
@@ -350,5 +350,5 @@ MIT — 자세한 내용은 [LICENSE](LICENSE)를 참조하세요.
 ---
 
 <div align="center">
-Built with <a href="https://github.com/___OMUTECHAI___/oh-my-unity3d">OMU</a> · Powered by <a href="https://github.com/CoplayDev/unity-mcp">unity-mcp</a>
+Built with <a href="https://github.com/JEO-tech-ai/oh-my-unity3d">OMU</a> · Powered by <a href="https://github.com/CoplayDev/unity-mcp">unity-mcp</a>
 </div>
