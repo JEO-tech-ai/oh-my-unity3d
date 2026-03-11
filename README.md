@@ -12,6 +12,7 @@
 [![Gemini CLI](https://img.shields.io/badge/Gemini%20CLI-supported-blue?style=flat-square)](https://gemini.google.com)
 [![OpenCode](https://img.shields.io/badge/OpenCode-supported-purple?style=flat-square)](https://opencode.ai)
 [![Skills](https://img.shields.io/badge/skills-44-yellow?style=flat-square)](#-skills-index)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-orange?logo=buy-me-a-coffee)](https://www.buymeacoffee.com/akillness3q)
 
 **AI-driven Unity3D game development orchestration — Plan → Execute → Verify → Cleanup**
 
