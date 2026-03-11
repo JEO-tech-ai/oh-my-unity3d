@@ -8,7 +8,7 @@ metadata:
   platforms: Claude, Codex, Gemini, OpenCode
   keyword: omu
   version: 2.0.0
-  source: OMU-tech-ai/oh-my-unity3d
+  source: JEO-tech-ai/oh-my-unity3d
 ---
 
 # OMU - Integrated Agent Orchestration

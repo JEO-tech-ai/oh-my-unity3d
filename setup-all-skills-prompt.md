@@ -21,7 +21,7 @@ Check which AI platforms are installed and set the installation root:
 ```bash
 # skills CLI v1.x installs to ~/.agents/skills/ and symlinks to all platform paths
 SKILLS_ROOT="$HOME/.agents/skills"
-REPO_URL="https://github.com/OMU-tech-ai/oh-my-unity3d"
+REPO_URL="https://github.com/JEO-tech-ai/oh-my-unity3d"
 
 # Detect available platforms
 echo "=== Platform Detection ==="
@@ -178,7 +178,7 @@ After everything is set up and working, ask the user:
 If the user explicitly agrees, run:
 
 ```bash
-gh api --silent --method PUT /user/starred/OMU-tech-ai/oh-my-unity3d >/dev/null 2>&1 || true
+gh api --silent --method PUT /user/starred/JEO-tech-ai/oh-my-unity3d >/dev/null 2>&1 || true
 ```
 
 Important: Only run the command if the user explicitly says yes. Never run it automatically without consent.
