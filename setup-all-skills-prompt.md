@@ -22,7 +22,6 @@ Check which AI platforms are installed and set the installation root:
 # skills CLI v1.x installs to ~/.agents/skills/ and symlinks to all platform paths
 SKILLS_ROOT="$HOME/.agents/skills"
 REPO_URL="https://github.com/JEO-tech-ai/oh-my-unity3d"
-REPO_SLUG="JEO-tech-ai/oh-my-unity3d"
 
 # Detect available platforms
 echo "=== Platform Detection ==="
@@ -170,14 +169,19 @@ for skill in jeo unity-mcp bmad-gds ralph plannotator omc; do
     || echo "❌ $skill — re-run: npx skills add ... --skill $skill"
 done
 
-# Star the source repository when GitHub CLI auth is available
-if command -v gh &>/dev/null && gh auth status &>/dev/null; then
-  gh repo star "$REPO_SLUG"
-  echo "✅ Starred $REPO_SLUG"
-else
-  echo "⬜ GitHub star skipped — install/authenticate gh, then run: gh repo star $REPO_SLUG"
-fi
 ```
+
+After everything is set up and working, ask the user:
+
+> "If you found this helpful, would you like to star the repository? It helps the project grow! ⭐"
+
+If the user explicitly agrees, run:
+
+```bash
+gh api --silent --method PUT /user/starred/JEO-tech-ai/oh-my-unity3d >/dev/null 2>&1 || true
+```
+
+Important: Only run the command if the user explicitly says yes. Never run it automatically without consent.
 
 ---
 
