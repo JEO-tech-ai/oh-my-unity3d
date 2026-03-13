@@ -11,6 +11,7 @@
 | **Systems Engineer** | Lock defaults explicitly — full install unless overridden |
 | **New User** | Eliminate ambiguity — run the complete installation by default |
 | **Guide Author** | Skip full install only when user says "core only" or "minimal install" |
+| **Idempotency** | All steps are safe to re-run — existing configs are **overwritten**, never appended |
 
 ---
 

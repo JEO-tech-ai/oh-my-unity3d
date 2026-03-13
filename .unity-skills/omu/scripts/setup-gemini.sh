@@ -176,12 +176,27 @@ OMUEOF
   else
     mkdir -p "$(dirname "$GEMINI_MD")"
     [[ -f "$GEMINI_MD" ]] && cp "$GEMINI_MD" "${GEMINI_MD}.omu.bak"
-    if [[ -f "$GEMINI_MD" ]] && grep -q "## OMU Orchestration Workflow" "$GEMINI_MD"; then
-      ok "OMU section already present in GEMINI.md"
-    else
-      printf "%s\n" "$OMU_SECTION" >> "$GEMINI_MD"
-      ok "OMU instructions added to GEMINI.md"
-    fi
+    OMU_SECTION_ESCAPED="$OMU_SECTION" python3 - "$GEMINI_MD" <<'PYEOF'
+import os, sys, re
+
+md_path = sys.argv[1]
+new_section = os.environ["OMU_SECTION_ESCAPED"].strip()
+
+content = open(md_path).read() if os.path.exists(md_path) else ""
+
+# Remove any existing OMU section (from ## OMU Orchestration Workflow to next ## or EOF)
+content = re.sub(
+    r'\n*## OMU Orchestration Workflow.*?(?=\n## |\Z)',
+    '',
+    content,
+    flags=re.DOTALL
+).rstrip()
+
+content = content + "\n\n" + new_section + "\n"
+os.makedirs(os.path.dirname(os.path.abspath(md_path)), exist_ok=True)
+open(md_path, "w").write(content)
+print("✓ OMU section updated in GEMINI.md")
+PYEOF
   fi
 fi
 
