@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-2.3.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
+[![Version](https://img.shields.io/badge/version-2.4.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?style=flat-square&logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-orange?style=flat-square)](https://claude.ai)
@@ -44,13 +44,22 @@ Plan ──► Execute ──► Verify ──► Cleanup
 
 ---
 
-## ✨ What's New in v2.3.0
+## ✨ What's New in v2.4.0
+
+| # | Change | Details |
+|---|--------|---------|
+| 🐛 | **Plannotator feedback loop fix** | `omu` SKILL.md now explicitly instructs the agent to read `plannotator_feedback.annotations` from `omu-state.json`, apply every annotation to `plan.md`, and reset `plan_gate_status` before re-running — feedback was previously skipped on subsequent rounds |
+
+<details>
+<summary>v2.3.0</summary>
 
 | # | Change | Details |
 |---|--------|---------|
 | 🆕 | **AI auto-configure MCP** | `unity-mcp` SKILL.md now instructs the AI agent to automatically write correct MCP config to `settings.json` when invoked |
 | 🔄 | **Step-by-step setup flow** | SKILL.md rewritten with explicit Step 1–4 guide (Package → Start → Config → Verify) |
 | 🐛 | **Compatibility note fix** | Removed incorrect Python 3.10+/uv requirement from skill metadata |
+
+</details>
 
 <details>
 <summary>v2.1.0</summary>
@@ -309,6 +318,12 @@ oh-my-unity3d/
 ---
 
 ## 📋 Changelog
+
+### `v2.4.0` — Plannotator Feedback Loop Fix
+
+- **Fixed** `omu` SKILL.md plan gate: agent now explicitly reads `plannotator_feedback.annotations` from `omu-state.json` and applies every annotation to `plan.md` before re-running the loop
+- **Fixed** Feedback skipped on second round: added `plan_gate_status` reset to `"pending"` before each re-run
+- **Fixed** Ambiguous re-run instruction: replaced "run the loop again" with a 6-step explicit feedback application protocol
 
 ### `v2.3.0` — AI Auto-Configure MCP
 

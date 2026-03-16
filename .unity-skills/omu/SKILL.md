@@ -7,7 +7,7 @@ metadata:
   tags: omu, orchestration, ralph, plannotator, team, bmad, omc, omx, ohmg, agent-browser, multi-agent, workflow, worktree-cleanup, browser-verification
   platforms: Claude, Codex, Gemini, OpenCode
   keyword: omu
-  version: 2.0.0
+  version: 2.4.0
   source: JEO-tech-ai/oh-my-unity3d
 ---
 
@@ -96,7 +96,14 @@ Rules:
 - Never use `&`.
 - If `plannotator` is missing, auto-run `bash scripts/ensure-plannotator.sh` first.
 - Proceed only when the result contains `approved=true`.
-- If the plan is rejected, update `plan.md` and run the loop again.
+- If the loop exits `10` (plan rejected with feedback):
+  1. Read `.omc/state/omu-state.json` → `plannotator_feedback` field
+  2. Extract `annotations` array — each entry has `action`: `delete` | `insert` | `replace` | `comment`
+  3. Apply **every** annotation to `plan.md` — do not skip any
+  4. Also apply any top-level `note` field as general guidance
+  5. Reset `plan_gate_status` to `"pending"` in the state file before re-running
+  6. Re-run `bash scripts/plannotator-plan-loop.sh plan.md /tmp/plannotator_feedback.txt 3`
+  - **Never re-run the loop without first applying all feedback from the state file.**
 - If the loop exits with `32`, use manual conversation approval and do not execute until the user explicitly approves.
 
 When approved, update the state file:

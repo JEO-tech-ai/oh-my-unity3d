@@ -47,6 +47,9 @@ npm install -g skills
 # --global: install to all detected platforms, overwrite existing versions
 
 # Core orchestration
+# plannotator feedback loop: when plan is rejected (exit 10), the agent MUST read
+# plannotator_feedback.annotations from .omc/state/omu-state.json and apply every
+# annotation to plan.md before re-running the loop. See omu/SKILL.md §1 for details.
 npx skills add "$REPO_URL" --skill omu --yes --global
 npx skills add "$REPO_URL" --skill ralph --yes --global
 npx skills add "$REPO_URL" --skill plannotator --yes --global
