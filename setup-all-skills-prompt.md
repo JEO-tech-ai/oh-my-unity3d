@@ -198,13 +198,18 @@ Important: Only run the command if the user explicitly says yes. Never run it au
 
 ## Quick Reference
 
-| Goal | Command |
-|------|---------|
-| First Unity3D game | `omu "씬 프로토타이핑: <game name>"` |
-| Implement a story | `omu "스토리 구현: <feature>"` |
-| Optimize performance | `omu "성능 최적화: <symptom>"` |
-| Generate GDD | `/bmad-gds-gdd` |
-| Review code | `/code-review` |
+### BMAD TEA Workflow (Think → Execute → Assess)
+
+| Phase | Goal | Command |
+|-------|------|---------|
+| **Think** | Brainstorm game concept | `bmad-cis-brainstorming` |
+| **Think** | Design for players | `bmad-cis-design-thinking` |
+| **Think** | Solve design problems | `bmad-cis-problem-solving` |
+| **Execute** | Generate GDD | `/bmad-gds-gdd` |
+| **Execute** | First Unity3D game | `omu "씬 프로토타이핑: <game name>"` |
+| **Execute** | Implement a story | `omu "스토리 구현: <feature>"` |
+| **Assess** | Review code | `/code-review` |
+| **Assess** | Optimize performance | `omu "성능 최적화: <symptom>"` |
 
 ---
 

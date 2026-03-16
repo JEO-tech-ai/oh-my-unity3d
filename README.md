@@ -27,17 +27,25 @@
 `oh-my-unity3d` is a release-ready distribution for the **OMU** orchestration skill package, extended for Unity3D game development with **unity-mcp** integration.
 
 ```
-Plan ──► Execute ──► Verify ──► Cleanup
- │          │           │
- │      unity-mcp    run_tests
- │      bmad-gds     read_console
- └──   omc / bmad    editor_state
+Think (bmad-idea) ──► Execute (bmad-gds) ──► Assess
+        │                    │                   │
+        ▼                    ▼                   ▼
+   Creative brief       GDD → Sprint        Game Testing
+   Problem diagnosis    Story → Code        Code Review
+   Narrative / pitch    unity-mcp           Retrospective
+                              │
+                    Plan ──► Verify ──► Cleanup
+                     │           │
+                   ralph     run_tests
+                plannotator  read_console
+                omc / bmad   editor_state
 ```
 
 | Layer | Component | Role |
 |-------|-----------|------|
 | **Orchestration** | `omu` | Plan → Execute → Verify → Cleanup pipeline |
-| **Game Dev** | `bmad-gds` | Brainstorm → GDD → Architecture → Sprint → Dev → Review |
+| **Creative / Think** | `bmad-idea` | Ideation → Design Thinking → Problem Solving → Narrative (BMAD TEA Think phase) |
+| **Game Dev / Execute+Assess** | `bmad-gds` | GDD → Architecture → Sprint → Dev → Testing → Retro (BMAD TEA Execute+Assess) |
 | **Unity Editor** | `unity-mcp` | 37 MCP tools for direct Unity Editor control |
 | **Planning Gate** | `ralph` + `plannotator` | Mandatory plan review before execution |
 | **Verification** | `agent-browser` + unity-mcp | Browser + Unity runtime verification loop |

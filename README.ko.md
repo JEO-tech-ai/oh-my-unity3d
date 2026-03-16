@@ -27,17 +27,25 @@
 `oh-my-unity3d`는 **OMU** 오케스트레이션 스킬 패키지의 배포 버전으로, **unity-mcp** 연동을 통해 Unity3D 게임 개발에 특화되어 있습니다.
 
 ```
-Plan ──► Execute ──► Verify ──► Cleanup
- │          │           │
- │      unity-mcp    run_tests
- │      bmad-gds     read_console
- └──   omc / bmad    editor_state
+Think (bmad-idea) ──► Execute (bmad-gds) ──► Assess
+        │                    │                   │
+        ▼                    ▼                   ▼
+   창의 브리프           GDD → 스프린트        게임 테스팅
+   문제 진단             스토리 → 코드        코드 리뷰
+   내러티브 / 피치       unity-mcp            회고 → Think
+                              │
+                    Plan ──► Verify ──► Cleanup
+                     │           │
+                   ralph     run_tests
+                plannotator  read_console
+                omc / bmad   editor_state
 ```
 
 | 레이어 | 컴포넌트 | 역할 |
 |--------|----------|------|
 | **오케스트레이션** | `omu` | Plan → Execute → Verify → Cleanup 파이프라인 |
-| **게임 개발** | `bmad-gds` | Brainstorm → GDD → Architecture → Sprint → Dev → Review |
+| **창의 / Think** | `bmad-idea` | 아이디어 → 디자인 씽킹 → 문제 해결 → 내러티브 (BMAD TEA Think 페이즈) |
+| **게임 개발 / Execute+Assess** | `bmad-gds` | GDD → 아키텍처 → 스프린트 → 개발 → 테스팅 → 회고 (BMAD TEA Execute+Assess) |
 | **Unity 에디터** | `unity-mcp` | Unity 에디터 직접 제어를 위한 MCP 도구 37종 |
 | **플래닝 게이트** | `ralph` + `plannotator` | 실행 전 필수 플랜 검토 단계 |
 | **검증** | `agent-browser` + unity-mcp | 브라우저 + Unity 런타임 검증 루프 |
