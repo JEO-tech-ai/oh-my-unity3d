@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-2.4.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
+[![Version](https://img.shields.io/badge/version-2.5.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?style=flat-square&logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-orange?style=flat-square)](https://claude.ai)
@@ -44,11 +44,22 @@ Plan ──► Execute ──► Verify ──► Cleanup
 
 ---
 
-## ✨ What's New in v2.4.0
+## ✨ What's New in v2.5.0
+
+| # | Change | Details |
+|---|--------|---------|
+| 🆕 | **BMAD TEA framework** | `bmad-idea` + `bmad-gds` now define the full **Think → Execute → Assess** loop with explicit SDD (Specification-Driven Development) principles and handoff table |
+| 🆕 | **SDD principles in bmad-gds** | 5 SDD principles embedded: spec-before-code, acceptance-criteria-upfront, story-driven execution, quality-gate-on-merge, retrospective feedback |
+| 🆕 | **bmad-idea handoff bridge** | New table maps each creative agent output (Carson, Maya, Victor, Dr. Quinn, Sophia) to the exact `bmad-gds` entry point |
+
+<details>
+<summary>v2.4.0</summary>
 
 | # | Change | Details |
 |---|--------|---------|
 | 🐛 | **Plannotator feedback loop fix** | `omu` SKILL.md now explicitly instructs the agent to read `plannotator_feedback.annotations` from `omu-state.json`, apply every annotation to `plan.md`, and reset `plan_gate_status` before re-running — feedback was previously skipped on subsequent rounds |
+
+</details>
 
 <details>
 <summary>v2.3.0</summary>
@@ -318,6 +329,13 @@ oh-my-unity3d/
 ---
 
 ## 📋 Changelog
+
+### `v2.5.0` — BMAD TEA + SDD Framework
+
+- **Added** BMAD TEA (Think→Execute→Assess) framework to `bmad-idea` and `bmad-gds` skills
+- **Added** SDD (Specification-Driven Development) 5-principle contract in `bmad-gds` — spec-before-code, AC upfront, story-driven, quality gate, retrospective loop
+- **Added** Handoff bridge table in `bmad-idea` — maps each creative agent (Carson/Maya/Victor/Dr.Quinn/Sophia) to the exact `bmad-gds` entry command
+- **Changed** `bmad-idea` v1.0.0 → v1.1.0, `bmad-gds` v0.1.4 → v0.2.0
 
 ### `v2.4.0` — Plannotator Feedback Loop Fix
 

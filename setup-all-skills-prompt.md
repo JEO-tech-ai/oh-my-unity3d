@@ -57,9 +57,11 @@ npx skills add "$REPO_URL" --skill plannotator --yes --global
 # Unity3D integration (required for Unity projects)
 npx skills add "$REPO_URL" --skill unity-mcp --yes --global
 
-# Game development workflow
-npx skills add "$REPO_URL" --skill bmad-gds --yes --global
-npx skills add "$REPO_URL" --skill bmad-idea --yes --global
+# Game development workflow — BMAD TEA (Think→Execute→Assess) + SDD
+# bmad-idea = Think phase: creative brief, problem diagnosis, narrative → feeds bmad-gds
+# bmad-gds  = Execute + Assess phases: GDD → architecture → stories → code → testing → retro
+npx skills add "$REPO_URL" --skill bmad-idea --yes --global  # Think first
+npx skills add "$REPO_URL" --skill bmad-gds --yes --global   # then Execute + Assess
 ```
 
 ---

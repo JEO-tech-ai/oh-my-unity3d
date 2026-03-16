@@ -1,17 +1,47 @@
 ---
 name: bmad-idea
-description: Creative Intelligence Suite for AI-driven ideation, design thinking, innovation strategy, problem-solving, and storytelling. 5 named specialist agents with distinct methodologies — no setup required, all workflows available immediately.
+description: Creative Intelligence Suite for AI-driven ideation, design thinking, innovation strategy, problem-solving, and storytelling. The Think phase of the BMAD TEA (Think→Execute→Assess) loop — produces specifications and creative briefs that feed directly into bmad-gds execution. 5 named specialist agents with distinct methodologies — no setup required, all workflows available immediately.
 allowed-tools: Read Write Bash Grep Glob
 metadata:
-  tags: bmad, cis, creative, ideation, brainstorming, design-thinking, innovation, problem-solving, storytelling, multi-agent
+  tags: bmad, cis, creative, ideation, brainstorming, design-thinking, innovation, problem-solving, storytelling, multi-agent, sdd, tea, think-phase
   platforms: Claude, Gemini, Codex, OpenCode
   keyword: bmad-idea
-  version: 1.0.0
+  version: 1.1.0
   source: user-installed skill
 ---
 
 
 # bmad-idea - BMAD Creative Intelligence Suite
+
+## BMAD TEA: Think Phase
+
+> **bmad-idea** is the **Think** phase of the BMAD TEA loop — the creative front-end that produces the specifications driving all downstream execution.
+
+```
+Think (YOU ARE HERE)  ──►  Execute (bmad-gds)  ──►  Assess
+  bmad-idea                  bmad-gds                 bmad-gds
+  Brainstorm                 GDD → Architecture       Game Testing
+  Design thinking            Dev stories              Code review
+  Problem diagnosis          Implementation           Retrospective
+  Narrative / pitch
+```
+
+### Handoff to Execute Phase
+
+When bmad-idea work is complete, the following artifacts flow into `bmad-gds`:
+
+| bmad-idea Output | Agent | → | bmad-gds Entry Point |
+|-----------------|-------|---|----------------------|
+| Creative brief / concept | Carson 🧠 | → | `bmad-gds-game-brief` |
+| User empathy map | Maya 🎨 | → | `bmad-gds-gdd` (player experience) |
+| Innovation / market strategy | Victor ⚡ | → | `bmad-gds-game-architecture` |
+| Problem diagnosis / root cause | Dr. Quinn 🔬 | → | `bmad-gds-correct-course` |
+| Narrative / story arc | Sophia 📖 | → | `bmad-gds-narrative` |
+| Full creative brief | creative squad | → | `bmad-gds-brainstorm-game` → `bmad-gds-game-brief` |
+
+The Assess phase (retrospective) feeds back into bmad-idea — run `bmad-cis-problem-solving` or `bmad-cis-brainstorming` to evolve specs based on playtest and review results.
+
+---
 
 ## When to use this skill
 

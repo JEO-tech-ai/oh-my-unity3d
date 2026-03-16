@@ -1,17 +1,44 @@
 ---
 name: bmad-gds
-description: AI-driven Game Development Studio using BMAD methodology. Routes game projects through Pre-production, Design, Architecture, Production, and Game Testing phases with 6 specialized agents. Supports Unity, Unreal Engine, Godot, and custom engines.
+description: AI-driven Game Development Studio using BMAD methodology. Covers the Execute and Assess phases of the BMAD TEA (Think→Execute→Assess) loop — the core Specification-Driven Development (SDD) cycle. Routes game projects through Pre-production, Design, Architecture, Production, and Game Testing phases with 6 specialized agents. Supports Unity, Unreal Engine, Godot, and custom engines.
 allowed-tools: Read Write Bash Grep Glob
 metadata:
-  tags: bmad, gds, game-development, game-design, gdd, unity, unreal, godot, multi-agent, workflow
+  tags: bmad, gds, game-development, game-design, gdd, unity, unreal, godot, multi-agent, workflow, sdd, tea, specification-driven
   platforms: Claude, Gemini, Codex, OpenCode
   keyword: bmad-gds
-  version: 0.1.4
+  version: 0.2.0
   source: user-installed skill
 ---
 
 
 # bmad-gds - BMAD Game Development Studio
+
+## BMAD TEA Framework
+
+> **BMAD TEA** = **Think** → **Execute** → **Assess** — the core loop of Specification-Driven Development (SDD).
+
+```
+Think (bmad-idea)  ──►  Execute (bmad-gds)  ──►  Assess (bmad-gds)
+  Ideation               Phases 1–4                Game Testing + Retro
+  Creative brief         Spec → Architecture        Quality gates
+  GDD draft seed         Story → Code               Feedback → next Think
+       ↑                                                   ↓
+       └──────────────── Feedback Loop ───────────────────┘
+```
+
+**bmad-gds covers Execute + Assess.** For the Think phase, use [`bmad-idea`](../bmad-idea/SKILL.md).
+
+### SDD Principles (Specification-Driven Development)
+
+| # | Principle | How bmad-gds Enforces It |
+|---|-----------|--------------------------|
+| 1 | **Spec before code** | GDD and architecture exist before Phase 4 begins |
+| 2 | **Acceptance criteria upfront** | Test design (Phase 3) is written before Production (Phase 4) |
+| 3 | **Story-driven execution** | Every code change traces to a reviewed, approved dev story |
+| 4 | **Quality gate on merge** | `bmad-gds-code-review` blocks merge until standards pass |
+| 5 | **Retrospective feedback** | Phase output feeds back into spec refinement for the next Think cycle |
+
+---
 
 ## When to use this skill
 

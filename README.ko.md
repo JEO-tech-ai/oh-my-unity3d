@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-2.4.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
+[![Version](https://img.shields.io/badge/version-2.5.0-blue?style=flat-square)](https://github.com/JEO-tech-ai/oh-my-unity3d/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?style=flat-square&logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-orange?style=flat-square)](https://claude.ai)
@@ -44,11 +44,22 @@ Plan ──► Execute ──► Verify ──► Cleanup
 
 ---
 
-## ✨ v2.4.0 새로운 기능
+## ✨ v2.5.0 새로운 기능
+
+| # | 변경 내용 | 상세 설명 |
+|---|-----------|-----------|
+| 🆕 | **BMAD TEA 프레임워크** | `bmad-idea` + `bmad-gds`에 **Think → Execute → Assess** 루프와 SDD(명세 주도 개발) 원칙 정의 |
+| 🆕 | **bmad-gds SDD 5원칙** | 코드 전 명세 작성, 사전 인수 기준 정의, 스토리 기반 실행, 병합 품질 게이트, 회고 피드백 |
+| 🆕 | **bmad-idea 핸드오프 브리지** | 각 창의 에이전트(Carson/Maya/Victor/Dr.Quinn/Sophia) 출력물을 `bmad-gds` 진입 명령과 매핑하는 표 추가 |
+
+<details>
+<summary>v2.4.0</summary>
 
 | # | 변경 내용 | 상세 설명 |
 |---|-----------|-----------|
 | 🐛 | **Plannotator 피드백 루프 수정** | `omu` SKILL.md에 `omu-state.json`의 `plannotator_feedback.annotations`를 읽어 `plan.md`에 적용하고 `plan_gate_status`를 초기화 후 재실행하는 명시적 지시 추가 — 두 번째 피드백부터 누락되던 문제 해결 |
+
+</details>
 
 <details>
 <summary>v2.3.0</summary>
@@ -318,6 +329,13 @@ oh-my-unity3d/
 ---
 
 ## 📋 변경 이력
+
+### `v2.5.0` — BMAD TEA + SDD 프레임워크
+
+- **추가** `bmad-idea`와 `bmad-gds` 스킬에 BMAD TEA(Think→Execute→Assess) 프레임워크 정의
+- **추가** `bmad-gds`에 SDD(명세 주도 개발) 5원칙 계약 — 코드 전 명세, 사전 인수 기준, 스토리 기반 실행, 품질 게이트, 회고 루프
+- **추가** `bmad-idea`에 핸드오프 브리지 표 — 창의 에이전트 출력 → `bmad-gds` 진입 명령 매핑
+- **변경** `bmad-idea` v1.0.0 → v1.1.0, `bmad-gds` v0.1.4 → v0.2.0
 
 ### `v2.4.0` — Plannotator 피드백 루프 수정
 
