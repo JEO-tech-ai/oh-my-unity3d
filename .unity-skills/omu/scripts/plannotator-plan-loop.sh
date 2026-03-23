@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PLAN_FILE="${1:-plan.md}"
 FEEDBACK_FILE="${2:-}"
 MAX_RESTARTS="${3:-3}"
-PORT_ERROR_REGEX='Failed to start server\. Is port .* in use|EADDRINUSE|EPERM|operation not permitted|Failed to listen'
+PORT_ERROR_REGEX='Failed to start server\. Is port .* in use|EADDRINUSE|EPERM|operation not permitted|Failed to listen|Cannot GET|404 Not Found|500 Internal Server Error|SyntaxError|Unexpected token|page error|ReferenceError|TypeError.*Cannot read'
 
 if ! command -v plannotator >/dev/null 2>&1; then
   if ! bash "$SCRIPT_DIR/ensure-plannotator.sh" --quiet; then
@@ -40,23 +40,6 @@ else
   mkdir -p "$(dirname "$FEEDBACK_FILE")"
 fi
 
-write_manual_feedback_json() {
-  local approved="$1"
-  local note="${2:-}"
-  python3 - "$FEEDBACK_FILE" "$approved" "$note" <<'PYEOF'
-import json, sys
-path, approved_raw, note = sys.argv[1], sys.argv[2], sys.argv[3]
-approved = approved_raw.lower() == "true"
-payload = {
-    "approved": approved,
-    "source": "omu-manual-fallback",
-    "note": note,
-}
-with open(path, "w", encoding="utf-8") as f:
-    json.dump(payload, f, ensure_ascii=False, indent=2)
-PYEOF
-}
-
 write_state_gate_status() {
   local status="$1"
   OMU_GATE_STATUS="$status" python3 -c "
@@ -83,38 +66,6 @@ if os.path.exists(f):
 " 2>/dev/null || true
 }
 
-manual_fallback_gate() {
-  if [[ ! -t 0 || ! -t 1 ]]; then
-    return 32
-  fi
-
-  echo "[OMU][PLAN] plannotator UI를 열 수 없는 환경입니다. 수동 PLAN gate로 전환합니다." >&2
-  echo "[OMU][PLAN] 선택: [a]pprove / [f]eedback / [s]top" >&2
-  read -r -p "선택하세요 [a/f/s]: " choice
-
-  case "${choice,,}" in
-    a|approve)
-      write_manual_feedback_json "true" "manual-approve (fallback gate)"
-      echo "[OMU][PLAN] manual approved=true" >&2
-      return 0
-      ;;
-    f|feedback)
-      read -r -p "피드백 내용을 입력하세요: " fb
-      write_manual_feedback_json "false" "${fb:-manual-feedback (fallback gate)}"
-      echo "[OMU][PLAN] manual approved=false (feedback)" >&2
-      return 10
-      ;;
-    s|stop|n|no)
-      echo "[OMU][PLAN] user requested PLAN stop." >&2
-      return 30
-      ;;
-    *)
-      echo "[OMU][PLAN] invalid choice. stopping PLAN." >&2
-      return 31
-      ;;
-  esac
-}
-
 probe_local_listen() {
   if command -v node >/dev/null 2>&1; then
     node -e "const http=require('http');const s=http.createServer(()=>{});s.on('error',()=>process.exit(1));s.listen({host:'127.0.0.1',port:0},()=>s.close(()=>process.exit(0)));" >/dev/null 2>&1
@@ -123,39 +74,70 @@ probe_local_listen() {
   return 0
 }
 
+# Non-interactive environment (Codex sandbox, CI, piped stdin): plannotator is required.
+# TUI fallback is disabled — plannotator must be available.
+if [[ ! -t 0 || ! -t 1 ]]; then
+  echo "[OMU][PLAN] plannotator UI가 필요합니다. 비대화형 환경에서는 plannotator 없이 PLAN을 승인할 수 없습니다." >&2
+  echo "[OMU][PLAN] plannotator를 설치하려면: bash scripts/ensure-plannotator.sh" >&2
+  write_state_gate_status "plannotator_required"
+  exit 32
+fi
+
 # Some sandboxes disallow localhost bind(). In that environment plannotator hook mode cannot run.
 if [[ "${OMU_SKIP_LISTEN_PROBE:-0}" != "1" ]]; then
   if ! probe_local_listen; then
-    echo "[OMU][PLAN] localhost bind probe failed (listen not permitted)." >&2
-    set +e
-    manual_fallback_gate
-    probe_rc=$?
-    set -e
-    if [[ "$probe_rc" -eq 32 ]]; then
-      write_state_gate_status "infrastructure_blocked"
-    fi
-    exit "$probe_rc"
+    echo "[OMU][PLAN] localhost bind 실패 — plannotator를 실행할 수 없습니다." >&2
+    echo "[OMU][PLAN] plannotator는 PLAN 단계에서 필수입니다. TUI 폴백은 비활성화되어 있습니다." >&2
+    write_state_gate_status "infrastructure_blocked"
+    exit 32
   fi
 fi
+
+STDERR_FILE="${FEEDBACK_DIR}/plannotator_stderr.txt"
+# Ensure lock is always cleaned up on script exit
+trap 'rm -f "${_TMPDIR:-${TMPDIR:-/tmp}}/omu-plannotator-direct-${SESSION_KEY}.lock"' EXIT INT TERM
 
 attempt=1
 while (( attempt <= MAX_RESTARTS )); do
   : > "$FEEDBACK_FILE"
-  touch /tmp/omu-plannotator-direct.lock
+  : > "$STDERR_FILE"
+  # Create lock BEFORE starting plannotator to prevent ExitPlanMode hook double-launch
+  touch "${_TMPDIR:-${TMPDIR:-/tmp}}/omu-plannotator-direct-${SESSION_KEY}.lock"
 
   python3 -c "
 import json, sys
 plan = open(sys.argv[1]).read()
 sys.stdout.write(json.dumps({'tool_input': {'plan': plan, 'permission_mode': 'acceptEdits'}}))
-" "$PLAN_FILE" | env HOME="$RUNTIME_HOME" PLANNOTATOR_HOME="$RUNTIME_HOME" plannotator > "$FEEDBACK_FILE" 2>&1 || true
+" "$PLAN_FILE" | env HOME="$RUNTIME_HOME" PLANNOTATOR_HOME="$RUNTIME_HOME" plannotator > "$FEEDBACK_FILE" 2>"$STDERR_FILE" || true
+
+  # Release lock immediately after plannotator exits
+  rm -f "${_TMPDIR:-${TMPDIR:-/tmp}}/omu-plannotator-direct-${SESSION_KEY}.lock"
+
+  # Merge stderr into feedback for error detection (keep JSON intact at start of FEEDBACK_FILE)
+  if [[ -s "$STDERR_FILE" ]]; then
+    echo "" >> "$FEEDBACK_FILE"
+    cat "$STDERR_FILE" >> "$FEEDBACK_FILE"
+  fi
 
   set +e
   python3 - "$FEEDBACK_FILE" <<'PYEOF'
 import json, sys
 path = sys.argv[1]
+payload = None
+# Read only the first valid JSON object (ignore appended stderr lines)
 try:
-    payload = json.load(open(path))
+    with open(path) as fh:
+        content = fh.read()
+    # Try full file first, then first non-empty line
+    for chunk in [content, content.split('\n')[0]]:
+        try:
+            payload = json.loads(chunk.strip())
+            break
+        except Exception:
+            pass
 except Exception:
+    pass
+if payload is None:
     sys.exit(20)
 approved = payload.get("approved")
 if approved is True:
@@ -179,12 +161,14 @@ if os.path.exists(state_path):
         s['plan_approved'] = True
         s['phase'] = 'execute'
         s['plan_gate_status'] = 'approved'
+        s['ralphmode_requested'] = True
         s['updated_at'] = datetime.datetime.utcnow().isoformat() + 'Z'
         with open(state_path, 'w') as f:
             json.dump(s, f, indent=2)
     except Exception:
         pass
 PYEOF
+    echo "[OMU][PLAN] ralphmode: permission profile activation requested — invoke /ralphmode before executing"
     exit 0
   fi
 
@@ -217,28 +201,18 @@ PYEOF
   fi
 
   if grep -Eiq "$PORT_ERROR_REGEX" "$FEEDBACK_FILE"; then
-    echo "[OMU][PLAN] plannotator server bind failure detected (EADDRINUSE/EPERM)." >&2
-    set +e
-    manual_fallback_gate
-    fallback_rc=$?
-    set -e
-    if [[ "$fallback_rc" -eq 32 ]]; then
-      write_state_gate_status "infrastructure_blocked"
-    fi
-    exit "$fallback_rc"
+    echo "[OMU][PLAN] plannotator 서버 바인딩 실패 (EADDRINUSE/EPERM)." >&2
+    echo "[OMU][PLAN] 포트 충돌 해결 후 재시도하세요: pkill plannotator; sleep 1" >&2
+    write_state_gate_status "infrastructure_blocked"
+    exit 32
   fi
 
   echo "[OMU][PLAN] session ended unexpectedly (attempt ${attempt}/${MAX_RESTARTS}). restarting..." >&2
   ((attempt++))
 done
 
-echo "[OMU][PLAN] plannotator session ended ${MAX_RESTARTS} times." >&2
-set +e
-manual_fallback_gate
-fallback_rc=$?
-set -e
-if [[ "$fallback_rc" -eq 32 ]]; then
-  echo "[OMU][PLAN] confirmation required. stop and ask user whether to continue PLAN." >&2
-  write_state_gate_status "infrastructure_blocked"
-fi
-exit "$fallback_rc"
+echo "[OMU][PLAN] plannotator 세션이 ${MAX_RESTARTS}회 종료되었습니다." >&2
+echo "[OMU][PLAN] plannotator가 정상 동작하지 않습니다. TUI 폴백은 비활성화되어 있습니다." >&2
+echo "[OMU][PLAN] 재설치: bash scripts/ensure-plannotator.sh" >&2
+write_state_gate_status "infrastructure_blocked"
+exit 32
